@@ -26,7 +26,7 @@ public class AudioInfo {
     private void createSampleArrayCollection() {
         try {
             audioInputStream.mark(Integer.MAX_VALUE);
-            audioInputStream.reset();
+            //audioInputStream.reset(); Dava erro ?:c/
             byte[] bytes = new byte[(int) (audioInputStream.getFrameLength()) * ((int) audioInputStream.getFormat().getFrameSize())];
             int result = 0;
             try {
@@ -100,5 +100,4 @@ public class AudioInfo {
         }
         return -1;
     }
-
 }

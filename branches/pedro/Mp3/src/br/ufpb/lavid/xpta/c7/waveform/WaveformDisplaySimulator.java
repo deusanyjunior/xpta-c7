@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 public class WaveformDisplaySimulator {
 
     public static void newWaveformDisplaySimulator(AudioInputStream audioInputStream) {
-            JFrame frame = new JFrame("Waveform Simulator");
+            JFrame frame = new JFrame("Waveform");
             frame.setBounds(200,200, 500, 350);
 
             WaveformPanelContainer container = new WaveformPanelContainer();
