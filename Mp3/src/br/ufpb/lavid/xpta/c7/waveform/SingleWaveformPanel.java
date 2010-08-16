@@ -1,14 +1,12 @@
 package br.ufpb.lavid.xpta.c7.waveform;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class SingleWaveformPanel extends JPanel {
-    protected static final Color BACKGROUND_COLOR = Color.white;
-    protected static final Color REFERENCE_LINE_COLOR = Color.black;
-    protected static final Color WAVEFORM_COLOR = Color.red;
+    protected static final Color BACKGROUND_COLOR = Color.black;
+    protected static final Color REFERENCE_LINE_COLOR = Color.red;
+    protected static final Color WAVEFORM_COLOR = Color.yellow;
 
 
     private AudioInfo helper;
@@ -63,12 +61,3 @@ public class SingleWaveformPanel extends JPanel {
         }
     }
 }
-
-/*   Swing Hacks
- *   Tips and Tools for Killer GUIs
- * By Joshua Marinacci, Chris Adamson
- *   First Edition June 2005
- *   Series: Hacks
- *   ISBN: 0-596-00907-0
- *   http://www.oreilly.com/catalog/swinghks/
- */
