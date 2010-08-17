@@ -5,24 +5,29 @@
 
 package br.ufpb.lavid.xpta.c7.ui;
 
+import br.ufpb.lavid.xpta.c7.waveform.WaveformPanelContainer;
+import java.awt.GridLayout;
 import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author rennan
  */
-public class JLabelWaveForm extends JLabel {
+public class JPanelWaveForm extends JPanel {
 
     private JPanelTrack panelTrack;
+    private WaveformPanelContainer container;
 
-    public JLabelWaveForm(JPanelTrack panelTrack) {
-        super((new ImageIcon("wave_form.png")));
+    public JPanelWaveForm(JPanelTrack panelTrack) {
+        this.setLayout(new GridLayout(1, 1));
         this.panelTrack = panelTrack;
+        add(panelTrack.getTrack().getWaveFormPanel(), SwingConstants.CENTER);
+        //TODO: setBounds( X, Y, Width, Height);
         setBounds(JPanelUpload.getRedLine(), panelTrack.getBounds().y, 700, panelTrack.getHeight());
         panelTrack.getTrack().setOffset((JPanelUpload.getRedLine()-415)*500);
         addMouseMotionListener(new DragAdapter());

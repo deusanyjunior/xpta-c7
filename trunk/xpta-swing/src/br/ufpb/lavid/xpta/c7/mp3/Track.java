@@ -1,5 +1,6 @@
 package br.ufpb.lavid.xpta.c7.mp3;
 
+import br.ufpb.lavid.xpta.c7.waveform.WaveformPanelContainer;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioFormat;
@@ -27,6 +28,7 @@ public class Track implements Runnable {
     private long remaingBytesUntilEnd;
     private boolean pause = false;
     private boolean isPlaying = false;
+    private WaveformPanelContainer container;
     // Número de bytes lidos:
     private int nBytesRead = 0;
     // Variável utilizada para implementar pause.
@@ -46,6 +48,7 @@ public class Track implements Runnable {
         this.start = start;
         this.end = end;
         this.offset = offset;
+        loadTrack();
     }
 
     /**
@@ -76,7 +79,6 @@ public class Track implements Runnable {
 
 
     public void run() {
-        loadTrack();
         playTrack(decodedFormat, din);
         try {
             in.close();
@@ -99,6 +101,8 @@ public class Track implements Runnable {
 
             // System.out.println(baseFormat.getSampleRate());
             din = AudioSystem.getAudioInputStream(decodedFormat, in);
+            container = new WaveformPanelContainer();
+            container.setAudioToDisplay(din);
                 // Salta para iniciar a música no startº byte.
 //            bytesOnASecond = ;
             din.skip(Math.round(bytesOnASecond*start / 1000.0));
@@ -204,6 +208,10 @@ public class Track implements Runnable {
 //                equalizer[i] = values[i];
 //            }
 //        }
+    }
+
+    public WaveformPanelContainer getWaveFormPanel() {
+        return container;
     }
 
     public float getBalance() {

@@ -30,7 +30,6 @@ public class WaveformPanelContainer extends JPanel {
 
         JLabel label = new JLabel("Channel " + ++index);
         panel.add(label, BorderLayout.NORTH);
-
         return panel;
     }
 }
