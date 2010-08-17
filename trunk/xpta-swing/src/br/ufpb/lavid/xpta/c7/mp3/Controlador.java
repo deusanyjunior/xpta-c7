@@ -115,7 +115,7 @@ public class Controlador extends JWindow implements Runnable {
          */
         public static void pacplAll(String diretorioDeEntrada, String diretorioDeSaida, String formato) {
             try {
-		String commandLine = "pacpl -p -t "+formato+" -r "+diretorioDeEntrada+" --outdir diretorioDeSaida";
+		String commandLine = "pacpl -p -t "+formato+" -r "+diretorioDeEntrada+" --overwrite --outdir diretorioDeSaida";
 		Runtime.getRuntime().exec(commandLine);
             } catch (IOException e) {
 		System.out.print("pacpl(): "+e.getMessage());
@@ -129,7 +129,7 @@ public class Controlador extends JWindow implements Runnable {
          */
         public static void pacplOne(String inputFile, String diretorioDeSaida, String formato) {
             try {
-		String commandLine = "pacpl -p -t "+formato+" --outdir diretorioDeSaida "+inputFile;
+		String commandLine = "pacpl -p -t "+formato+" --overwrite --outdir diretorioDeSaida "+inputFile;
 		Runtime.getRuntime().exec(commandLine);
             } catch (IOException e) {
 		System.out.print("pacpl(): "+e.getMessage());
