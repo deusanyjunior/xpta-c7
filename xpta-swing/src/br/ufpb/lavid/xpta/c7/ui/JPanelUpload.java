@@ -47,7 +47,7 @@ public class JPanelUpload extends javax.swing.JPanel {
     public void addTrack(String trackName){
         JPanelTrack jpt = new JPanelTrack(trackName);
         add(jpt);
-        add(new JLabelWaveForm(jpt));
+        add(new JPanelWaveForm(jpt));
         jpt.setBackground(new Color(panelTracks.size()*83%255, panelTracks.size()*151%255, panelTracks.size()*203%255));
     }
 
@@ -70,7 +70,7 @@ public class JPanelUpload extends javax.swing.JPanel {
     private class MusicFilenameFilter implements FilenameFilter {
 
         public boolean accept(File dir, String name) {
-            if(name.endsWith(".wav") || name.endsWith(".mp3"))
+            if(name.endsWith(".wav") || name.endsWith(".mp3") || name.endsWith(".aif"))
                 return true;
             return false;
         }
@@ -82,7 +82,7 @@ public class JPanelUpload extends javax.swing.JPanel {
         @Override
         public boolean accept(File f) {
             String name = f.getName();
-            if(f.isDirectory() || name.endsWith(".wav") || name.endsWith(".mp3"))
+            if(f.isDirectory() || name.endsWith(".wav") || name.endsWith(".mp3") || name.endsWith(".aif"))
                 return true;
             return false;
         }
