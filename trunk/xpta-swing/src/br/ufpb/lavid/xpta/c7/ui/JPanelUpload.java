@@ -11,6 +11,7 @@
 
 package br.ufpb.lavid.xpta.c7.ui;
 
+import br.ufpb.lavid.xpta.c7.mp3.Controlador;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -125,6 +126,7 @@ public class JPanelUpload extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButtonPlayPause = new javax.swing.JButton();
         jButtonStop = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -135,7 +137,7 @@ public class JPanelUpload extends javax.swing.JPanel {
             }
         });
         add(jComboBox1);
-        jComboBox1.setBounds(160, 2, 250, 27);
+        jComboBox1.setBounds(80, 0, 290, 27);
 
         jButton1.setText("Upload");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -144,11 +146,11 @@ public class JPanelUpload extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(0, 0, 88, 29);
+        jButton1.setBounds(270, 30, 100, 29);
 
         jLabel1.setText("Adicionar:");
         add(jLabel1);
-        jLabel1.setBounds(98, 5, 70, 16);
+        jLabel1.setBounds(0, 0, 70, 17);
 
         jButtonPlayPause.setText("Play");
         jButtonPlayPause.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +159,7 @@ public class JPanelUpload extends javax.swing.JPanel {
             }
         });
         add(jButtonPlayPause);
-        jButtonPlayPause.setBounds(5, 30, 200, 29);
+        jButtonPlayPause.setBounds(0, 30, 70, 29);
 
         jButtonStop.setText("Stop");
         jButtonStop.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +168,16 @@ public class JPanelUpload extends javax.swing.JPanel {
             }
         });
         add(jButtonStop);
-        jButtonStop.setBounds(205, 30, 200, 29);
+        jButtonStop.setBounds(80, 30, 70, 29);
+
+        jButton2.setText("Exportar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(160, 30, 100, 29);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -213,6 +224,10 @@ public class JPanelUpload extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Controlador.pacplAll("./Tracks", ".", "mp3");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void main(String[] args) throws InterruptedException {
         JFrame jFrame = new JFrame();
         jFrame.add(new JPanelUpload());
@@ -229,6 +244,7 @@ public class JPanelUpload extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonPlayPause;
     private javax.swing.JButton jButtonStop;
     private javax.swing.JComboBox jComboBox1;
