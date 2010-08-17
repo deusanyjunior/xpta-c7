@@ -18,9 +18,8 @@ public class Controlador extends JWindow implements Runnable {
         public JLabel label = new JLabel();
 
 	/**
-	 * A classe controladora recebe uma lista com todos os arquivos mp3 que
-	 * serão abertos, e fará o gerenciamento das atividades relacionadas à
-	 * execução das faixas simultaneamente.
+	 * A classe controladora de eventos de teclado recebe uma lista com todos os arquivos mp3 que
+	 * serão abertos, e fará o gerenciamento das atividades relacionadas à execução das faixas simultaneamente.
 	 * 
 	 * @param lista
 	 *            de arquivos mp3.
@@ -108,13 +107,42 @@ public class Controlador extends JWindow implements Runnable {
 		}
 	}
 
-	public static void main(String args[]) {
+        /**
+         * Converte utilizando o pacpl todos os áudios da pasta das tracks.
+         * @args diretorioDeEntrada é uma string que representa o diretório que terá recursivamente
+         * todos os arquivos(tracks) interiores a ele convertidos para o formato de saída.
+         * @args diretorioDeSaida diretório para o qual a saída da conversão enviará os novos arquivos.
+         */
+        public static void pacplAll(String diretorioDeEntrada, String diretorioDeSaida, String formato) {
+            try {
+		String commandLine = "pacpl -p -t "+formato+" -r "+diretorioDeEntrada+" --outdir diretorioDeSaida";
+		Runtime.getRuntime().exec(commandLine);
+            } catch (IOException e) {
+		System.out.print("pacpl(): "+e.getMessage());
+            }
+        }
+
+        /**
+         * Converte utilizando o pacpl uma faixa única.
+         * @args inputFile é uma string que representa o arquivo que será convertido.
+         * @args diretorioDeSaida diretório para o qual a saída da conversão enviará o novo arquivo convertido.
+         */
+        public static void pacplOne(String inputFile, String diretorioDeSaida, String formato) {
+            try {
+		String commandLine = "pacpl -p -t "+formato+" --outdir diretorioDeSaida "+inputFile;
+		Runtime.getRuntime().exec(commandLine);
+            } catch (IOException e) {
+		System.out.print("pacpl(): "+e.getMessage());
+            }
+        }
+
+        public static void main(String args[]) {
 
 		// ExecutorService pool = Executors.newFixedThreadPool(3);
 
 		ArrayList<Track> lista = new ArrayList<Track>();
 
-/*		lista
+               /* lista
 				.add(new Mp3(
 						"/media/FEC2-0D20/mp3/A/Annihilator/Schizo Deluxe/Annihilator - 03 - Warbird.mp3",
 						0));
@@ -126,7 +154,7 @@ public class Controlador extends JWindow implements Runnable {
 		lista
 				.add(new Mp3(
 						"/media/FEC2-0D20/mp3/A/Atrocity/Hallucinations/03 - Fatal Step.mp3",
-						0));*/
+						0));
 
                 String itunes = "/Users/rennan/Music/iTunes/iTunes Music/";
 
@@ -141,6 +169,8 @@ public class Controlador extends JWindow implements Runnable {
 
                 c.setSize(400,400);
                 c.setVisible(true);
+                *
+                */
 
 	}
 
