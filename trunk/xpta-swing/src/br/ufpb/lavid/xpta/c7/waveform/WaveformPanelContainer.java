@@ -27,9 +27,6 @@ public class WaveformPanelContainer extends JPanel {
     private JComponent createChannelDisplay(SingleWaveformPanel waveformPanel, int index) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(waveformPanel, BorderLayout.CENTER);
-
-        JLabel label = new JLabel("Channel " + ++index);
-        panel.add(label, BorderLayout.NORTH);
         return panel;
     }
 }
