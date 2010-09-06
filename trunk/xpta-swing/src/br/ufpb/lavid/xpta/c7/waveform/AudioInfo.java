@@ -27,7 +27,8 @@ public class AudioInfo {
         try {
             audioInputStream.mark(Integer.MAX_VALUE);
             //audioInputStream.reset(); Dava erro ?:c/
-            byte[] bytes = new byte[(int) (audioInputStream.getFrameLength()) * ((int) audioInputStream.getFormat().getFrameSize())];
+            long length = (audioInputStream.getFrameLength() == -1)? 1400 : audioInputStream.getFrameLength();
+            byte[] bytes = new byte[(int) (length) * ((int) audioInputStream.getFormat().getFrameSize())];
             int result = 0;
             try {
                 result = audioInputStream.read(bytes);
