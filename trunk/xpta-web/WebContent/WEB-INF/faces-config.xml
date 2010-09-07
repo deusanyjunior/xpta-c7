@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<managed-bean>
+		<managed-bean-name>projetoB</managed-bean-name>
+		<managed-bean-class>br.ufpb.lavid.xpta.bean.BeanProjeto</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>usuarioB</managed-bean-name>
+		<managed-bean-class>br.ufpb.lavid.xpta.bean.BeanUsuario</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>TrackB</managed-bean-name>
+		<managed-bean-class>br.ufpb.lavid.xpta.bean.BeanTrack</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>administradorB</managed-bean-name>
+		<managed-bean-class>br.ufpb.lavid.xpta.bean.BeanAdministrador</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<!-- Login -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>sair</from-outcome>
+			<to-view-id>/home.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>sucessoPessoa</from-outcome>
+			<to-view-id>/areaUsuario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Cadastro de usuario -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>novoUsuario</from-outcome>
+			<to-view-id>/cadastroUsuario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!--Usuário salvo  -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>usuarioSalvo</from-outcome>
+			<to-view-id>/sucesso.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Cadastro de Projeto -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>novoProjeto</from-outcome>
+			<to-view-id>/cadastroProjetos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Projeto salvo -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>projetosalvo</from-outcome>
+			<to-view-id>/sucesso.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<application>
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+	</application>xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+</faces-config>
