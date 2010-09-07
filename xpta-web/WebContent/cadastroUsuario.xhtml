@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich">
+    
+<f:view>
+<body>
+
+<h:form>
+
+	<h1>Cadastro de Usuario</h1>
+	<h:outputText value="Nome:" />
+	<h:inputText value="#{usuarioB.controllerUsuario.usuario.nome}" />
+	<br></br>
+	<br></br>
+	<h:outputText value="Email:"  />
+	<h:inputText value="#{usuarioB.controllerUsuario.usuario.email}" />
+	<br></br>
+	<br></br>
+	<h:outputText value="Login: " />
+	<h:inputText value="#{usuarioB.controllerUsuario.usuario.login}" />
+	<br></br>
+	<br></br>
+	<h:outputText value="Senha:" />
+	<h:inputSecret value="#{usuarioB.controllerUsuario.usuario.senha}" />
+	<br></br>
+
+	<br></br>
+	<h:commandButton action="#{usuarioB.controllerUsuario.salvarUsuario}" value="Enviar" />
+	
+	
+	
+</h:form>
+</body>
+
+</f:view>    
+</html>
