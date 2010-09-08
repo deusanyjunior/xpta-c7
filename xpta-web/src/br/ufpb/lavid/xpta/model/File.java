@@ -23,7 +23,7 @@ public class File {
         if(extDot > 0){
             String extension = name.substring(extDot +1);
             if("mp3".equals(extension)){
-                mime="files/mp3";
+                mime="/files";
             } else if("jpg".equals(extension)){
                 mime="image/jpeg";
             } else if("gif".equals(extension)){

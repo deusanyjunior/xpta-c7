@@ -56,6 +56,15 @@ public class ControllerProjeto {
 		dataModel = new ListDataModel(daoProjeto.findAll());
 		return dataModel;
 	}
+	
+/* ***************Listar Todos os Projetos Públicos ****************** */
+
+	public DataModel getListaProjetosPublicos(){
+		
+		dataModel = new ListDataModel(daoProjeto.findProjectByPermission());
+		return dataModel;
+	}
+		
 
 /* ***************Editar Projeto ******************* */
 	public String editarProjeto(){

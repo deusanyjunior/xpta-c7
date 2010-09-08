@@ -16,6 +16,9 @@ public class BeanProjeto {
 		return controllerProjeto.salvarProjeto();
 	}
 	
+	public DataModel getListaProjetosPublicos(){
+		return controllerProjeto.getListaProjetosPublicos();
+	}
 	public DataModel getListaProjeto(){
 		return controllerProjeto.getListaProjetos();
 	}
