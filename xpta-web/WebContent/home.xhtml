@@ -25,7 +25,7 @@
 	<br></br>
 	<br />
 	<fieldset style="height: 95%"><legend>Projetos</legend> 
-		<rich:dataTable value="#{projetoB.listaProjeto}" var="projeto" id="listaProjeto">
+		<rich:dataTable value="#{projetoB.listaProjetosPublicos}" var="projeto" id="listaProjeto">
 			<rich:column filterBy="#{projeto.codigo}" filterEvent="onkeyup" sortBy="#{projeto.codigo}">
 			<f:facet name="header">
 				<h:outputText value="Codigo" />
@@ -44,14 +44,7 @@
 						</f:facet>
 						<h:outputText value="#{projeto.descricaoFormato}" />
 			</rich:column>
-			<rich:column sortBy="#{reclamacao.dataReclamacao}">
-						<f:facet name="header">
-							<h:outputText value="Data da Criacao " />
-						</f:facet>
-						<h:outputText value="#{projeto.dataCriacao}">
-							<f:convertDateTime dateStyle="short" />
-						</h:outputText>
-					</rich:column>
+						
 			<rich:column sortBy="#{projeto.dataUltimaModificacao}">
 						<f:facet name="header">
 							<h:outputText value="Ultima modificacao " />
@@ -60,7 +53,7 @@
 							<f:convertDateTime dateStyle="short" />
 						</h:outputText>
 			</rich:column>	
-			<rich:column>
+			<rich:column reRender="#{projeto.permissao == 'Publico'}">
 						<f:facet name="header">
 							<h:outputText value="Permissao " />
 						</f:facet>
