@@ -36,16 +36,16 @@
                         var="file" rowKeyVar="row">
                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                             <h:panelGrid columns="2">
-                                <a4j:mediaOutput element="img" mimeType="#{fileB.file.mime}"
-                                    createContent="#{fileB.file.paint}" value="#{row}"
+                                <a4j:mediaOutput element="img" mimeType="#{file.mime}"
+                                    value="#{row}"
                                     style="width:100px; height:100px;" cacheable="false">
                                     <f:param value="#{fileB.timeStamp}" name="time"/>  
                                 </a4j:mediaOutput>
                                 <h:panelGrid columns="2">
                                     <h:outputText value="File Name:" />
-                                    <h:outputText value="#{fileB.file.name}" />
+                                    <h:outputText value="#{file.name}" />
                                     <h:outputText value="File Length(bytes):" />
-                                    <h:outputText value="#{fileB.file.length}" />
+                                    <h:outputText value="#{file.length}" />
                                 </h:panelGrid>
                             </h:panelGrid>
                         </rich:panel>
