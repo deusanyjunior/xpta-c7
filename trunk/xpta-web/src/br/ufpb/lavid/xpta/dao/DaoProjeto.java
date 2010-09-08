@@ -28,4 +28,8 @@ public class DaoProjeto extends DAOJPA<Projeto>{
 	public List<Projeto> findProjectByDono(int id){
 		return (List<Projeto>) super.findAllByQuery("select p from Projeto p where p.dono = "+ id);
 	}
+	
+	public List<Projeto> findProjectByPermission(){
+		return (List<Projeto>) super.findAllByQuery("select p from Projeto p where p.permissao = 'Publico'");
+	}
 }

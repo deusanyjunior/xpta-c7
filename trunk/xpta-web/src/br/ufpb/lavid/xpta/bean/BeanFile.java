@@ -34,11 +34,14 @@ public class BeanFile{
 	public void listener(UploadEvent event) throws Exception{
 		UploadItem item = event.getUploadItem();
 		File file = new File();
-		file.setLength(item.getData().length);
+		System.out.println("instanciou o arquivo");
+		file.setLength(item.getFile().length());
 		file.setName(item.getFileName());
 		file.setData(item.getData());
 		files.add(file);
+		System.out.println("file add");
 		uploadsAvailable--;
+		System.out.println("fim do metodo");
 	}  
 
 	public String clearUploadData() {
