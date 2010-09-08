@@ -18,11 +18,11 @@
 
     <h:form>
         <h:panelGrid columns="2" columnClasses="top,top">
-            <rich:fileUpload locale="/files" fileUploadListener="#{fileUploadBean.listener}"
-                maxFilesQuantity="#{fileUploadBean.uploadsAvailable}"
+            <rich:fileUpload locale="/files" fileUploadListener="#{fileB.listener}"
+                maxFilesQuantity="#{fileB.uploadsAvailable}"
                 id="upload"
-                immediateUpload="#{fileUploadBean.autoUpload}"
-                acceptedTypes="jpg, gif, png, bmp" allowFlash="#{fileUploadBean.useFlash}">
+                immediateUpload="#{fileB.autoUpload}"
+                acceptedTypes="mp3,jpg, gif, png, bmp" allowFlash="#{fileB.useFlash}">
                 <a4j:support event="onuploadcomplete" reRender="info" />
             </rich:fileUpload>
             <h:panelGroup id="info">
@@ -31,21 +31,21 @@
                         <h:outputText value="Uploaded Files Info" />
                     </f:facet>
                     <h:outputText value="No files currently uploaded"
-                        rendered="#{fileUploadBean.size==0}" />
-                    <rich:dataGrid columns="1" value="#{fileUploadBean.files}"
+                        rendered="#{fileB.size==0}" />
+                    <rich:dataGrid columns="1" value="#{fileB.files}"
                         var="file" rowKeyVar="row">
                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                             <h:panelGrid columns="2">
-                                <a4j:mediaOutput element="img" mimeType="#{file.mime}"
-                                    createContent="#{fileUploadBean.paint}" value="#{row}"
+                                <a4j:mediaOutput element="img" mimeType="#{fileB.file.mime}"
+                                    createContent="#{fileB.file.paint}" value="#{row}"
                                     style="width:100px; height:100px;" cacheable="false">
-                                    <f:param value="#{fileUploadBean.timeStamp}" name="time"/>  
+                                    <f:param value="#{fileB.timeStamp}" name="time"/>  
                                 </a4j:mediaOutput>
                                 <h:panelGrid columns="2">
                                     <h:outputText value="File Name:" />
-                                    <h:outputText value="#{file.name}" />
+                                    <h:outputText value="#{fileB.file.name}" />
                                     <h:outputText value="File Length(bytes):" />
-                                    <h:outputText value="#{file.length}" />
+                                    <h:outputText value="#{fileB.file.length}" />
                                 </h:panelGrid>
                             </h:panelGrid>
                         </rich:panel>
@@ -53,9 +53,9 @@
                 </rich:panel>
                 <rich:spacer height="3"/>
                 <br />
-                <a4j:commandButton action="#{fileUploadBean.clearUploadData}"
+                <a4j:commandButton action="#{fileB.clearUploadData}"
                     reRender="info, upload" value="Clear Uploaded Data"
-                    rendered="#{fileUploadBean.size>0}" />
+                    rendered="#{fileB.size>0}" />
             </h:panelGroup>
         </h:panelGrid>
     </h:form>

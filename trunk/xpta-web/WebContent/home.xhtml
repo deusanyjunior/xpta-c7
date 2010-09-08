@@ -24,6 +24,60 @@
 	<h:commandButton action="#{usuarioB.controllerUsuario.novoUsuario}" value="Cadastrar usuario" />
 	<br></br>
 	<br />
+	<fieldset style="height: 95%"><legend>Projetos</legend> 
+		<rich:dataTable value="#{projetoB.listaProjeto}" var="projeto" id="listaProjeto">
+			<rich:column filterBy="#{projeto.codigo}" filterEvent="onkeyup" sortBy="#{projeto.codigo}">
+			<f:facet name="header">
+				<h:outputText value="Codigo" />
+			</f:facet>
+			<h:outputText value="#{projeto.codigo}" action="" />
+			</rich:column>
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome " />
+						</f:facet>
+						<h:outputText value="#{projeto.nome}" />
+			</rich:column>
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Descricacao " />
+						</f:facet>
+						<h:outputText value="#{projeto.descricaoFormato}" />
+			</rich:column>
+			<rich:column sortBy="#{reclamacao.dataReclamacao}">
+						<f:facet name="header">
+							<h:outputText value="Data da Criacao " />
+						</f:facet>
+						<h:outputText value="#{projeto.dataCriacao}">
+							<f:convertDateTime dateStyle="short" />
+						</h:outputText>
+					</rich:column>
+			<rich:column sortBy="#{projeto.dataUltimaModificacao}">
+						<f:facet name="header">
+							<h:outputText value="Ultima modificacao " />
+						</f:facet>
+						<h:outputText value="#{projeto.dataUltimaModificacao}">
+							<f:convertDateTime dateStyle="short" />
+						</h:outputText>
+			</rich:column>	
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Permissao " />
+						</f:facet>
+						<h:outputText value="#{projeto.permissao}" />
+			</rich:column>
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Autor " />
+						</f:facet>
+						<h:outputText value="#{projeto.dono}" />
+			</rich:column>		
+			
+		</rich:dataTable>
+	</fieldset>
+	
+	
+	<br></br>
 	<h:commandLink value="Projeto 1"/>
 	<br></br>
 	<h:commandLink value="Projeto 2"/>
