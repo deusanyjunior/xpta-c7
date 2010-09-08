@@ -1,5 +1,7 @@
 package br.ufpb.lavid.xpta.bean;
 
+import javax.faces.model.DataModel;
+
 import br.ufpb.lavid.xpta.controller.ControllerProjeto;
 
 public class BeanProjeto {
@@ -11,10 +13,12 @@ public class BeanProjeto {
 	}
 	
 	public String salvarProjeto(){
-		//System.out.print("chegou no bean");
 		return controllerProjeto.salvarProjeto();
 	}
-
+	
+	public DataModel getListaProjeto(){
+		return controllerProjeto.getListaProjetos();
+	}
 	public ControllerProjeto getControllerProjeto() {
 		return controllerProjeto;
 	}
