@@ -26,6 +26,12 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
+	<managed-bean>
+		<managed-bean-name>fileB</managed-bean-name>
+		<managed-bean-class>br.ufpb.lavid.xpta.bean.BeanFile</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
 	<!-- Login -->
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
