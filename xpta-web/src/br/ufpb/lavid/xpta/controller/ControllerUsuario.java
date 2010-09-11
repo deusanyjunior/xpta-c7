@@ -15,27 +15,30 @@ import br.ufpb.lavid.xpta.model.Usuario;
 public class ControllerUsuario {
 
 	private DaoUsuario daoUsuario = new DaoUsuario();
-	private Usuario usuario = new Usuario();
 	private DataModel dataModel;
-	private String login;
-	private String senha;
 	
-	public String novoUsuario(){
-		this.usuario = new Usuario();
-		return "novoUsuario";
-	}
-	public String salvarUsuario(){
-		daoUsuario.begin();
-		if (usuario.getCodigo() == 0){
-			usuario.setPerfil("Usuario");
-			daoUsuario.persist(usuario);
-			daoUsuario.commit();
-		}else{
-			daoUsuario.merge(usuario);
-			daoUsuario.commit();
+	/*Salva o usuário o banco*/
+	public String salvarUsuario(Usuario user){
+		
+		try {
+			daoUsuario.begin();
+			if (user.getCodigo() == 0){
+				user.setPerfil("Usuario");
+				daoUsuario.persist(user);
+				daoUsuario.commit();
+			}else{
+				daoUsuario.merge(user);
+				daoUsuario.commit();
 
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+
+			daoUsuario.close();
 		}
-		daoUsuario.close();
+		
 		return "usuarioSalvo";
 	}
 	
@@ -47,68 +50,67 @@ public class ControllerUsuario {
 		dataModel = new ListDataModel(daoUsuario.findAll());
 		return dataModel;
 	}
+	
+	/*public DataModel listarUsuarioById(int id){
+		dataModel = new ListDataModel(daoUsuario.findUsuarioById(id));
+		return dataModel;
+	}*/
 
 /* ***************Editar Usuario ******************* */
-	public String editarUsuario(){
-		usuario = (Usuario) dataModel.getRowData();
-		setUsuario(usuario);
+	public String editarUsuario(Usuario user){
+		try {
+			user = (Usuario) dataModel.getRowData();
+			daoUsuario.begin();
+			daoUsuario.merge(user);
+			daoUsuario.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			daoUsuario.close();
+		}
+		
 		return "usuarioEditado";
 	}
 /* ***************Excluir Usuario ****************** */
-	public String excluirUsuario(){
-		usuario = (Usuario) dataModel.getRowData();
-		daoUsuario.begin();
-		daoUsuario.remove(usuario);
-		daoUsuario.commit();
-		daoUsuario.close();
+	public String excluirUsuario(Usuario user){
+		try {
+			user = (Usuario) dataModel.getRowData();
+			daoUsuario.begin();
+			daoUsuario.remove(user);
+			daoUsuario.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			daoUsuario.close();
+		}
+		
 		return "excluidoUsuario";
 	}
 	
-	public String logar() throws IOException{
+	/* Faz o login */
+	public String logar(String login, String senha) throws IOException{
 
-        DaoPessoa daoPessoa = new DaoPessoa();
-        Pessoa logado =  daoPessoa.validaLogin(login,senha);
+        //DaoPessoa daoPessoa = new DaoPessoa();
+        Usuario user =  daoUsuario.validaLogin(login,senha);
         
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         
-        if(logado!= null){           
-          session.setAttribute("user", logado); 
-          daoPessoa.close();     
-          return "sucessoPessoa"; 
+        if(user!= null){           
+          session.setAttribute("user", user); 
+          daoUsuario.close();     
+          return "sucessoUsuario"; 
         } 
          else{
-        	 daoPessoa.close();
+        	 daoUsuario.close();
         	 return "sair";  
            }  
     }
 	
+	/* Faz o logout */
 	public String logout() throws IOException{
 
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        
-          session.removeAttribute("user"); 
-          return "sair"; 
+        session.removeAttribute("user"); 
+        return "sair"; 
     }
-
-/* ************** Getters and Setters ************** */
-	
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
 }

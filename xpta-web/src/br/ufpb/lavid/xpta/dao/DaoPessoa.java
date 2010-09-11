@@ -9,7 +9,4 @@ public class DaoPessoa extends DAOJPA<Pessoa> {
 		super();
 	}
 	
-	public Pessoa validaLogin(String login, String senha){
-		return (Pessoa)super.findByQuery("SELECT p from Pessoa p where p.login = '"+login+"' and p.senha = '"+senha+"'");
-	}
 }
