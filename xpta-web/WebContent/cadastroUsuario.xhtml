@@ -14,23 +14,23 @@
 
 	<h1>Cadastro de Usuario</h1>
 	<h:outputText value="Nome:" />
-	<h:inputText value="#{usuarioB.controllerUsuario.usuario.nome}" />
+	<h:inputText value="#{usuarioB.usuario.nome}" />
 	<br></br>
 	<br></br>
 	<h:outputText value="Email:"  />
-	<h:inputText value="#{usuarioB.controllerUsuario.usuario.email}" />
+	<h:inputText value="#{usuarioB.usuario.email}" />
 	<br></br>
 	<br></br>
 	<h:outputText value="Login: " />
-	<h:inputText value="#{usuarioB.controllerUsuario.usuario.login}" />
+	<h:inputText value="#{usuarioB.usuario.login}" />
 	<br></br>
 	<br></br>
 	<h:outputText value="Senha:" />
-	<h:inputSecret value="#{usuarioB.controllerUsuario.usuario.senha}" />
+	<h:inputSecret value="#{usuarioB.usuario.senha}" />
 	<br></br>
 
 	<br></br>
-	<h:commandButton action="#{usuarioB.controllerUsuario.salvarUsuario}" value="Enviar" />
+	<h:commandButton action="#{usuarioB.cadastrarUsuario}" value="Enviar" />
 	
 	
 	

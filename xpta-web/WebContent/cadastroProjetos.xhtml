@@ -13,22 +13,22 @@
 	<body>
 		<h:form>
 		<h:outputText value="Nome do Projeto:"/>
-		<h:inputText value="#{projetoB.controllerProjeto.projeto.nome}"/>
+		<h:inputText value="#{projetoB.projeto.nome}"/>
 		<br></br>
 		<br></br>
 		<h:outputText value="Descricao do formato:" />
-		<h:inputTextarea value="#{projetoB.controllerProjeto.projeto.descricaoFormato}"/>
+		<h:inputTextarea value="#{projetoB.projeto.descricaoFormato}"/>
 		<br></br>
 		<br></br>
 		<h:outputText value="Permissao"/>
-		<h:selectOneMenu value="#{projetoB.controllerProjeto.projeto.permissao}">
+		<h:selectOneMenu value="#{projetoB.projeto.permissao}">
 		<f:selectItem itemValue="" itemLabel="Selecione a permissao"/>
 		<f:selectItem itemValue="Publico" itemLabel="Publico"/>
 		<f:selectItem itemValue="Privado" itemLabel="Privado"/>
 		</h:selectOneMenu>
 		<br></br>
 		<br></br>
-		<h:commandButton action="#{projetoB.salvarProjeto}" value="Enviar"/> 
+		<h:commandButton action="#{projetoB.cadastrarProjeto}" value="Enviar"/> 
 		
 		</h:form>
 	</body>
