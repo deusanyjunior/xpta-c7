@@ -13,18 +13,18 @@
 <h1>XPTA</h1>
 <h:form >
 	<h:outputText value="nome:" />
-	<h:inputText value="#{usuarioB.controllerUsuario.login}" />
+	<h:inputText value="#{usuarioB.login}" />
 	<br></br>
 	<br></br>
 	<h:outputText value="Senha:" />
-	<h:inputSecret value="#{usuarioB.controllerUsuario.senha}"/>
+	<h:inputSecret value="#{usuarioB.senha}"/>
 	<br></br>
 	<br></br>
-	<h:commandButton action="#{usuarioB.controllerUsuario.logar}" value="Enviar" />
-	<h:commandButton action="#{usuarioB.controllerUsuario.novoUsuario}" value="Cadastrar usuario" />
+	<h:commandButton action="#{usuarioB.fazerLogin}" value="Enviar" />
+	<h:commandButton action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
 	<br></br>
 	<br />
-	<fieldset style="height: 95%"><legend>Projetos</legend> 
+	  <fieldset style="height: 95%"><legend>Projetos</legend> 
 		<rich:dataTable value="#{projetoB.listaProjetosPublicos}" var="projeto" id="listaProjeto">
 			<rich:column filterBy="#{projeto.codigo}" filterEvent="onkeyup" sortBy="#{projeto.codigo}">
 			<f:facet name="header">
@@ -63,7 +63,7 @@
 						<f:facet name="header">
 							<h:outputText value="Autor " />
 						</f:facet>
-						<h:outputText value="#{projeto.dono}" />
+						<h:outputText value="#{projeto.autor}" />
 			</rich:column>		
 			
 		</rich:dataTable>
@@ -71,6 +71,12 @@
 	
 	
 	<br></br>
+	
+	<h:panelGrid bgcolor="#002233" style="FONT-SIZE: xx-small; width : 250px; height : 84px;">
+		<h:panelGrid>
+			
+		</h:panelGrid>
+	<h:graphicImage onmouseup="navigator=moveTo(margin-left:2px, margin-top:0px)"  style="margin-left:0px;" value="/images/avisos.png" /></h:panelGrid>
 	<h:commandLink value="Projeto 1"/>
 	<br></br>
 	<h:commandLink value="Projeto 2"/>

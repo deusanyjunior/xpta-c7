@@ -13,15 +13,15 @@
 <h1>login</h1>
 <h:form >
 	<h:outputText value="nome:" />
-	<h:inputText value="#{usuarioB.controllerUsuario.login}" />
+	<h:inputText value="#{usuarioB.login}" />
 	<br></br>
 	<br></br>
 	<h:outputText value="Senha:" />
-	<h:inputSecret value="#{usuarioB.controllerUsuario.senha}"/>
+	<h:inputSecret value="#{usuarioB.senha}"/>
 	<br></br>
 	<br></br>
-	<h:commandButton action="#{usuarioB.controllerUsuario.logar}" value="Enviar" />
-	<h:commandButton action="#{usuarioB.controllerUsuario.novoUsuario}" value="Cadastrar usuario" />
+	<h:commandButton action="#{usuarioB.fazerLogin}" value="Enviar" />
+	<h:commandButton action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
 </h:form>
 </body>
 

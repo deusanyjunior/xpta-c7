@@ -1,77 +1,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
 
-	<f:view>
-		<body>
-		<h1>Area do usuario</h1>
-		<h:form>
-		<h:commandButton action="#{usuarioB.controllerUsuario.logout}" value="Sair" />
+<f:view>
+	<body>
+	<h1>Area do usuario</h1>
+	<h:form>
+		<h:commandButton action="#{usuarioB.fazerLogout}" value="Sair" />
 		<br></br>
 		<br></br>
 		Ola:  <h:outputText value="#{sessionScope.user.nome}" />
 		<br></br>
 		<br></br>
 		<h:commandButton value="novo" action="#{projetoB.invokeMethods}" />
-		</h:form>
-		
-		<fieldset style="height: 95%"><legend>Projetos</legend> 
-		<rich:dataTable value="#{projetoB.listaProjeto}" var="projeto" id="listaProjeto">
-			<rich:column filterBy="#{projeto.codigo}" filterEvent="onkeyup" sortBy="#{projeto.codigo}">
-			<f:facet name="header">
-				<h:outputText value="Codigo" />
-			</f:facet>
-			<h:outputText value="#{projeto.codigo}" action="" />
+
+
+		<fieldset style="height: 95%"><legend>Projetos</legend> <rich:dataTable
+			value="#{projetoB.listaProjeto}" var="projeto"
+			id="listaProjetoUsuario">
+			<rich:column filterBy="#{projeto.codigo}" filterEvent="onkeyup"
+				sortBy="#{projeto.codigo}">
+				<f:facet name="header">
+					<h:outputText value="Codigo" />
+				</f:facet>
+				<h:outputText value="#{projeto.codigo}" action="" />
 			</rich:column>
 			<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Nome " />
-						</f:facet>
-						<h:outputText value="#{projeto.nome}" />
+				<f:facet name="header">
+					<h:outputText value="Nome " />
+				</f:facet>
+				<h:outputText value="#{projeto.nome}" />
 			</rich:column>
 			<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Descricacao " />
-						</f:facet>
-						<h:outputText value="#{projeto.descricaoFormato}" />
+				<f:facet name="header">
+					<h:outputText value="Descricacao " />
+				</f:facet>
+				<h:outputText value="#{projeto.descricaoFormato}" />
 			</rich:column>
 			<rich:column sortBy="#{projeto.dataCriacao}">
-						<f:facet name="header">
-							<h:outputText value="Data da Criacao " />
-						</f:facet>
-						<h:outputText value="#{projeto.dataCriacao}">
-							<f:convertDateTime dateStyle="short" />
-						</h:outputText>
-					</rich:column>
+				<f:facet name="header">
+					<h:outputText value="Data da Criacao " />
+				</f:facet>
+				<h:outputText value="#{projeto.dataCriacao}">
+					<f:convertDateTime dateStyle="short" />
+				</h:outputText>
+			</rich:column>
 			<rich:column sortBy="#{projeto.dataUltimaModificacao}">
-						<f:facet name="header">
-							<h:outputText value="Ultima modificacao " />
-						</f:facet>
-						<h:outputText value="#{projeto.dataUltimaModificacao}">
-							<f:convertDateTime dateStyle="short" />
-						</h:outputText>
-			</rich:column>	
-			<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Permissao " />
-						</f:facet>
-						<h:outputText value="#{projeto.permissao}" />
+				<f:facet name="header">
+					<h:outputText value="Ultima modificacao " />
+				</f:facet>
+				<h:outputText value="#{projeto.dataUltimaModificacao}">
+					<f:convertDateTime dateStyle="short" />
+				</h:outputText>
 			</rich:column>
 			<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Autor " />
-						</f:facet>
-						<h:outputText value="#{projeto.dono}" />
-			</rich:column>		
-			
-		</rich:dataTable>
-	</fieldset>
-		</body>
+				<f:facet name="header">
+					<h:outputText value="Permissao " />
+				</f:facet>
+				<h:outputText value="#{projeto.permissao}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Autor " />
+				</f:facet>
+
+			</rich:column>
+
+		</rich:dataTable></fieldset>
+	</h:form>
+	</body>
 	
-	</f:view>
+</f:view>
 
 </html>
