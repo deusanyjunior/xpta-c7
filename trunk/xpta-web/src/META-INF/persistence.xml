@@ -21,7 +21,8 @@
 			<property name="toplink.jdbc.user" 		value="postgres" />				
 			<property name="toplink.jdbc.password" 	value="postgres" />
 			<property name="toplink.logging.level"  value="off" />
-			<property name="toplink.ddl-generation" value="create-tables" />  
+			<!-- <property name="toplink.ddl-generation" value="drop-and-create-tables" />  -->   
+			  
 		</properties>
 	</persistence-unit>
 </persistence>

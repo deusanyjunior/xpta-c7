@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,7 +34,9 @@ public class Projeto {
 	private String nome;
 	private String descricaoFormato;
 	private String permissao;
-	private int dono;
+	
+	@ManyToOne
+	private Usuario autor;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataCriacao;
@@ -110,11 +113,14 @@ public class Projeto {
 		this.trackDeAudio = trackDeAudio;
 		
 	}
-	public int getDono() {
-		return dono;
+
+	public Usuario getAutor() {
+		return autor;
 	}
-	public void setDono(int dono) {
-		this.dono = dono;
+
+	public void setAutor(Usuario autor) {
+		this.autor = autor;
 	}
+	
 	
 }
