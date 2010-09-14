@@ -14,18 +14,18 @@ public class ControllerProjeto {
 
 	public String salvarProjeto(Projeto p){
 		try {
-			System.out.print("metodo salvar");
+			
 			daoProjeto.begin();
 			if (p.getCodigo() == 0){
 				p.setDataCriacao(new Date());
 				daoProjeto.persist(p);
 				daoProjeto.commit();
-				System.out.print("SALVOU");
+				
 			}else{
 				p.setDataUltimaModificacao(new Date());
 				daoProjeto.merge(p);
 				daoProjeto.commit();
-				System.out.print("atualizou");
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,7 +44,7 @@ public class ControllerProjeto {
 		return dataModel;
 	}
 	
-/* ***************Listar Todos os Projetos Públicos ****************** */
+/* ***************Listar Todos os Projetos Pï¿½blicos ****************** */
 
 	public DataModel listaProjetosPublicos(){
 		
