@@ -17,16 +17,18 @@ import org.ajax4jsf.util.base64.EncoderException;
 import org.richfaces.event.UploadEvent;
 import org.richfaces.model.UploadItem;
 
-import br.ufpb.lavid.xpta.model.File;
+import br.ufpb.lavid.xpta.model.File2;
+import br.ufpb.lavid.xpta.model.Projeto;
 
 public class BeanFile{
 
-	private ArrayList<File> files = new ArrayList<File>();
+	private ArrayList<File2> files = new ArrayList<File2>();
 	private int uploadsAvailable = 1;
 	private boolean autoUpload = false;
 	private boolean useFlash = false;
 	private static final String separator = System.getProperty("file.separator");
-	
+	private Projeto project = new Projeto();
+	private BeanProjeto beanProjeto;
 	public BeanFile() {
 	}
 
@@ -43,13 +45,12 @@ public class BeanFile{
 		stream.write(getFiles().get((Integer)object).getData());
 	}
 	public void listener(UploadEvent event) throws Exception{
+
+
 		UploadItem item = event.getUploadItem();
+		
 		java.io.File file = item.getFile();
-		System.out.println("instanciou o arquivo");
-//		file.setLength(item.getFile().length());
-//		file.setName(item.getFileName());
-//		file.setData(item.getData());
-//		files.add(file);
+		
 		gravarDadoOriginal(new FileInputStream(file), item.getFileName(), file.length());
 		System.out.println("file add");
 		uploadsAvailable--;
@@ -63,10 +64,9 @@ public class BeanFile{
 		ServletContext sc = (ServletContext) FacesContext.getCurrentInstance()
 				.getExternalContext().getContext();
 		
-//		String filepath = System.getProperty("catalina.base") + separator + "webapps" + separator + "xptafiles" + separator;
-//		filepath = filepath + separator;
-		
-		String filepath = System.getProperty("user.home")+separator+"xptafiles"+separator;
+		System.out.print("dentro do metodo gravarDados");
+		int id = retornaCodigoProjeto(beanProjeto.getProjeto());
+		String filepath = System.getProperty("catalina.base")+separator+"webapps"+separator+"Projetos"+separator + id;
 		filepath = filepath + separator;
 		
 		FileOutputStream fos = new FileOutputStream(filepath + nomeDoArquivo);
@@ -98,11 +98,11 @@ public class BeanFile{
 		return System.currentTimeMillis();
 	}
 
-	public ArrayList<File> getFiles() {
+	public ArrayList<File2> getFiles() {
 		return files;
 	}
 
-	public void setFiles(ArrayList<File> files) { 
+	public void setFiles(ArrayList<File2> files) { 
 		this.files = files;
 	}
 
@@ -129,5 +129,26 @@ public class BeanFile{
 	public void setUseFlash(boolean useFlash) {
 		this.useFlash = useFlash;
 	}
+	
+	public int retornaCodigoProjeto(Projeto projeto){
+		setProject(projeto);
+		System.out.print("acessou o metodo retorna projeto");
+		System.out.print(projeto.getCodigo());
+		int cod = projeto.getCodigo();
+		
+		return cod;
 
+	}
+
+	public Projeto getProject() {
+		return project;
+	}
+
+	public void setProject(Projeto project) {
+		this.project = project;
+	}
+
+	
+	
+	
 }
