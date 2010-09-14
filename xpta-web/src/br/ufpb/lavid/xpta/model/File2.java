@@ -1,7 +1,7 @@
 package br.ufpb.lavid.xpta.model;
 
 
-public class File {
+public class File2 {
 
     private String Name;
     private String mime;
