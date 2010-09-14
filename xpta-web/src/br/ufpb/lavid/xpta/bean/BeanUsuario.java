@@ -17,23 +17,23 @@ public class BeanUsuario {
 	private String senha;
 	private Usuario usuario;
 	
-	/*Instancia novo usuário*/
+	/*Instancia novo usuï¿½rio*/
 	public String novoUsuario(){
 		this.usuario = new Usuario();
 		return "novoUsuario";
 	}
 	
-	/*Chama o método salvar do controller e cadastra um usuário*/
+	/*Chama o mï¿½todo salvar do controller e cadastra um usuï¿½rio*/
 	public String cadastrarUsuario(){
 		return controllerUsuario.salvarUsuario(usuario);
 	}
 	
-	/*Chama o método do controller e edita um usuário*/
+	/*Chama o mï¿½todo do controller e edita um usuï¿½rio*/
 	public String editarUsuario(){
 		return controllerUsuario.editarUsuario(usuario);
 	}
 	
-	/*Chama o método do controller e exclui um usuário*/
+	/*Chama o mï¿½todo do controller e exclui um usuï¿½rio*/
 	public String excluirUsuario(){
 		return controllerUsuario.excluirUsuario(usuario);
 	}
@@ -46,7 +46,7 @@ public class BeanUsuario {
 	
 	
 	public String fazerLogin() throws IOException{
-		System.out.print("Acessou o método fazerLogin");
+		
 		return controllerUsuario.logar(login, senha);
 	}
 	/*Faz o logout*/

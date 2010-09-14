@@ -14,11 +14,12 @@ public class BeanProjeto {
 
 	private ControllerProjeto controllerProjeto = new ControllerProjeto();
 	private Projeto projeto;
-	
-	/* ******Chama o método que cria o projeto e seta o usuario nele***** */
+	private BeanFile upFile = new BeanFile();
+	/* ******Chama o mï¿½todo que cria o projeto e seta o usuario nele***** */
 
 	public String invokeMethods(){
 		novoProjeto();
+	
 		setarUsuarioProjeto();
 		return "novoProjeto"; 
 	}
@@ -28,11 +29,11 @@ public class BeanProjeto {
 	public String novoProjeto(){
 		this.projeto = new Projeto();
 		projeto.setDataCriacao(new Date());
-		System.out.print("instanciou novo projeto");
+		
 		return "novoProjeto";
 	}
 	
-	/* ******Seta usuário no projeto****** */
+	/* ******Seta usuï¿½rio no projeto****** */
 	
 	public void setarUsuarioProjeto(){
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -40,24 +41,40 @@ public class BeanProjeto {
 		projeto.setAutor(user);
 	}
 	
-	/* ******Chama o método do controller para salvar o projeto***** */
+	/* ******Chama o mï¿½todo do controller para salvar o projeto***** */
 	public String cadastrarProjeto(){
-		return controllerProjeto.salvarProjeto(projeto);
-		
+	
+		controllerProjeto.salvarProjeto(projeto);
+		criarPasta(projeto);
+		upFile.retornaCodigoProjeto(projeto);
+		return "projetosalvo";
 	}
 	
-	/* ******Chama o método do controller para editar o projeto***** */
+	/* ******Chama o mï¿½todo do controller para editar o projeto***** */
 
 	public String editarProjeto(){
 		return controllerProjeto.editarProjeto(projeto);
 	}
 	
-	/* ******Chama o método do controller para excluir o projeto***** */
+	/* ******Chama o mï¿½todo do controller para excluir o projeto***** */
 
 	public String excluirProjeto(){
 		return controllerProjeto.excluirProjeto(projeto);
 	}
 	
+	public String criarPasta(Projeto projeto){
+		System.out.print("antes de criar a pasta ");
+		
+			java.io.File pasta = new java.io.File("/var/lib/tomcat6/webapps/Projetos/" + projeto.getCodigo());
+			if (pasta.mkdir()){
+				return "pasta criada";
+			}
+			else
+				return "pasta nao criada";
+	
+		
+		
+	}
 	/* ************** Getters and Setters ************** */
 
 	public Projeto getProjeto() {
