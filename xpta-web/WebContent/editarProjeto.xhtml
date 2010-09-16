@@ -22,8 +22,9 @@
                 maxFilesQuantity="#{fileB.uploadsAvailable}"
                 id="upload"
                 immediateUpload="#{fileB.autoUpload}"
-                acceptedTypes="mp3,jpg, gif, png, bmp" allowFlash="#{fileB.useFlash}">
+                acceptedTypes="mp3" allowFlash="#{fileB.useFlash}">
                 <a4j:support event="onuploadcomplete" reRender="info" />
+              
             </rich:fileUpload>
             <h:panelGroup id="info">
                 <rich:panel bodyClass="info">
