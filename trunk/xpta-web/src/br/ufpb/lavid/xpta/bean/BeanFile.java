@@ -9,9 +9,10 @@ import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
-
+import java.lang.Object;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.ajax4jsf.util.base64.EncoderException;
 import org.richfaces.event.UploadEvent;
@@ -27,9 +28,11 @@ public class BeanFile{
 	private boolean autoUpload = false;
 	private boolean useFlash = false;
 	private static final String separator = System.getProperty("file.separator");
-	private Projeto project = new Projeto();
 	private BeanProjeto beanProjeto;
+	private BeanTrack beanTrack;
+	
 	public BeanFile() {
+		
 	}
 
 	public int getSize() {
@@ -39,6 +42,14 @@ public class BeanFile{
 		{
 			return 0;
 		}
+	}
+	
+	public BeanProjeto getBeanProjeto() {
+		return beanProjeto;
+	}
+
+	public void setBeanProjeto(BeanProjeto beanProjeto) {
+		this.beanProjeto = beanProjeto;
 	}
 
 	public void paint(OutputStream stream, Object object) throws IOException {
@@ -55,6 +66,8 @@ public class BeanFile{
 		System.out.println("file add");
 		uploadsAvailable--;
 		System.out.println("fim do metodo");
+		System.out.print("nome: "+ file.getName());
+		
 	}  
 	
 	public void gravarDadoOriginal(FileInputStream fis, String nomeDoArquivo, long tamanhoDoArquivo) throws IOException,
@@ -64,8 +77,11 @@ public class BeanFile{
 		ServletContext sc = (ServletContext) FacesContext.getCurrentInstance()
 				.getExternalContext().getContext();
 		
-		System.out.print("dentro do metodo gravarDados");
-		int id = retornaCodigoProjeto(beanProjeto.getProjeto());
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        int id = beanProjeto.getProjeto().getCodigo();
+        System.out.print("id!!!!!! ====== " + id);
+        //Projeto projeto = ((BeanProjeto) session. getComponentBean("beanProjeto", BeanProjeto.class)).getProjeto();
+		
 		String filepath = System.getProperty("catalina.base")+separator+"webapps"+separator+"Projetos"+separator + id;
 		filepath = filepath + separator;
 		
@@ -85,6 +101,7 @@ public class BeanFile{
 		}
 		fos.close();
 		fis.close();
+		
 		
 }
 
@@ -129,26 +146,5 @@ public class BeanFile{
 	public void setUseFlash(boolean useFlash) {
 		this.useFlash = useFlash;
 	}
-	
-	public int retornaCodigoProjeto(Projeto projeto){
-		setProject(projeto);
-		System.out.print("acessou o metodo retorna projeto");
-		System.out.print(projeto.getCodigo());
-		int cod = projeto.getCodigo();
-		
-		return cod;
 
-	}
-
-	public Projeto getProject() {
-		return project;
-	}
-
-	public void setProject(Projeto project) {
-		this.project = project;
-	}
-
-	
-	
-	
 }
