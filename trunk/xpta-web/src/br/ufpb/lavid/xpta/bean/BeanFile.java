@@ -30,7 +30,7 @@ public class BeanFile{
 	private static final String separator = System.getProperty("file.separator");
 	private BeanProjeto beanProjeto;
 	private BeanTrack beanTrack;
-	
+	private String nome;
 	public BeanFile() {
 		
 	}
@@ -66,7 +66,8 @@ public class BeanFile{
 		System.out.println("file add");
 		uploadsAvailable--;
 		System.out.println("fim do metodo");
-		System.out.print("nome: "+ file.getName());
+		nome = (String) item.getFileName().trim();
+		System.out.print("nome: "+ nome);
 		
 	}  
 	
@@ -102,6 +103,9 @@ public class BeanFile{
 		fos.close();
 		fis.close();
 		
+		if (beanTrack.novaTrack() == "novaTrack"){
+			beanTrack.salvarTrack(nome, 0,0);
+		}
 		
 }
 
