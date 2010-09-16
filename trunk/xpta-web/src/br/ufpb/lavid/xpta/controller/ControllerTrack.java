@@ -12,16 +12,8 @@ public class ControllerTrack {
 		private DaoTrack daoTrack = new DaoTrack();
 		private Track track;
 		private DataModel dataModel;
-		
-		public String novaTrack(){
-			this.track = new Track();
 			
-			return "novaTrack";
-		}
-		
-		/* Salva a track, caso ela já exista, atualiza*/
-		
-		public String salvarTrack(){
+		public String salvarTrack(Track track){
 			daoTrack.begin();
 			if (track.getCodigo() == 0){
 				daoTrack.persist(track);
