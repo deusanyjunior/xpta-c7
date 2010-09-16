@@ -15,7 +15,7 @@ public class BeanTrack {
 	}
 	
 	/* Salva a track, caso ela já exista, atualiza*/
-	public String salvarTrack(){
+	public String salvarTrack(String nome, int pan, int volume){
 		return controllerTrack.salvarTrack(this.track);
 		
 	}
