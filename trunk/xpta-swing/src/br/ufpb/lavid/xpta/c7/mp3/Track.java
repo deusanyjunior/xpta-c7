@@ -11,6 +11,7 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.util.ArrayList;
 
 public class Track implements Runnable {
 
@@ -120,6 +121,34 @@ public class Track implements Runnable {
         } catch (IOException f) {
             f.printStackTrace();
         }
+    }
+
+    /**
+    * Método que carrega os bytes do Audio Input em um ArrayList de bytes.
+    **/
+    private ArrayList<Byte> loadByteArray() {
+	byte[] nextBytes;
+	ArrayList<Byte> trackBytes = new ArrayList<Byte>();
+	try {
+	    audiofile = new File(filePath);
+	    in = AudioSystem.getAudioInputStream(audioFile);
+	    AudioFormat baseFormat = in.getFormat();
+	    decodedFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+		baseFormat.getSampleRate(), 16, baseFormat.getChannels(),
+		baseFormat.getChannels() * 2, baseFormat.getSampleRate(),
+		false);
+	    din = AudioSystem.getAudioInputStream(decodedFormat, in);
+
+	    while (nBytesRead != -1) {
+            	nBytesRead = din.read(nextBytes);
+                if (nBytesRead != -1) {
+		    for (byte b: nextBytes)
+		        trackBytes.add(new Byte(b));
+	    	}
+	    }
+	} catch (Exception e) {
+	   e.printMessage();	
+	}
     }
 
     private void playTrack(AudioFormat targetFormat, AudioInputStream din) {
