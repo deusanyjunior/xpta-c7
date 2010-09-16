@@ -14,6 +14,7 @@ public class BeanProjeto {
 
 	private ControllerProjeto controllerProjeto = new ControllerProjeto();
 	private Projeto projeto;
+	private int codprojeto;
 	private BeanFile upFile = new BeanFile();
 	/* ******Chama o m�todo que cria o projeto e seta o usuario nele***** */
 
@@ -44,9 +45,8 @@ public class BeanProjeto {
 	/* ******Chama o m�todo do controller para salvar o projeto***** */
 	public String cadastrarProjeto(){
 	
-		controllerProjeto.salvarProjeto(projeto);
-		criarPasta(projeto);
-		upFile.retornaCodigoProjeto(projeto);
+		controllerProjeto.salvarProjeto(this.projeto);
+		criarPasta(this.projeto);
 		return "projetosalvo";
 	}
 	
@@ -72,9 +72,12 @@ public class BeanProjeto {
 			else
 				return "pasta nao criada";
 	
-		
-		
 	}
+	public Projeto retornaProjeto(){
+		return projeto;
+	}
+	
+	
 	/* ************** Getters and Setters ************** */
 
 	public Projeto getProjeto() {
@@ -97,5 +100,14 @@ public class BeanProjeto {
 	public void setControllerProjeto(ControllerProjeto controllerProjeto) {
 		this.controllerProjeto = controllerProjeto;
 	}
+
+	public int getCodprojeto() {
+		return codprojeto;
+	}
+
+	public void setCodprojeto(int codprojeto) {
+		this.codprojeto = codprojeto;
+	}
+	
 	
 }
