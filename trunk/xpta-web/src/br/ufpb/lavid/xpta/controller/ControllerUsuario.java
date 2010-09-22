@@ -17,8 +17,8 @@ public class ControllerUsuario {
 	private DaoUsuario daoUsuario = new DaoUsuario();
 	private DataModel dataModel;
 	
-	/*Salva o usuário o banco*/
-	public String salvarUsuario(Usuario user){
+	/*Salva o usuï¿½rio o banco*/
+	public boolean salvarUsuario(Usuario user){
 		
 		try {
 			daoUsuario.begin();
@@ -39,7 +39,7 @@ public class ControllerUsuario {
 			daoUsuario.close();
 		}
 		
-		return "usuarioSalvo";
+		return true;
 	}
 	
 
