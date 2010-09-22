@@ -34,7 +34,7 @@
     <auth-method>BASIC</auth-method>
   </login-config>
   <welcome-file-list>
-    <welcome-file>home.xhtml</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   
   <filter>

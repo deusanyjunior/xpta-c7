@@ -34,6 +34,10 @@
 			<property-name>beanProjeto</property-name>
 			<value>#{projetoB}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>beanTrack</property-name>
+			<value>#{trackB}</value>
+		</managed-property>
 	</managed-bean>
 	
 	<!-- Login -->
