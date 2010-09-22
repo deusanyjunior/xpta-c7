@@ -25,7 +25,15 @@ public class BeanUsuario {
 	
 	/*Chama o m�todo salvar do controller e cadastra um usu�rio*/
 	public String cadastrarUsuario(){
-		return controllerUsuario.salvarUsuario(usuario);
+		 if (controllerUsuario.salvarUsuario(usuario)){
+			 try {
+				controllerUsuario.logar(usuario.getLogin(),usuario.getSenha());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		 }
+		 return "usuarioSalvo";
+		 
 	}
 	
 	/*Chama o m�todo do controller e edita um usu�rio*/
@@ -42,13 +50,12 @@ public class BeanUsuario {
 		return controllerUsuario.listarUsuarioById(id);
 	}*/
 	
+	
 	/* Faz o login */
-	
-	
 	public String fazerLogin() throws IOException{
-		
 		return controllerUsuario.logar(login, senha);
 	}
+	
 	/*Faz o logout*/
 	public String fazerLogout() throws IOException{
 		return controllerUsuario.logout();
