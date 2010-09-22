@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @SuppressWarnings("unchecked")
-@Entity(name = "Track")
+@Entity
 public class Track {
 
 	@Id
@@ -26,8 +26,8 @@ public class Track {
 	private byte[] trilha ={};
 	private HashMap audio = new HashMap();
 	
-	@ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-	private Projeto projetos = new Projeto();
+	
+	private int projetos;
 
 	public Track() {
 
@@ -88,11 +88,11 @@ public class Track {
 		this.audio = audio;
 	}
 
-	public Projeto getProjetos() {
+	public int getProjetos() {
 		return projetos;
 	}
 
-	public void setProjetos(Projeto projetos) {
+	public void setProjetos(int projetos) {
 		this.projetos = projetos;
 	}	
 	
