@@ -30,6 +30,7 @@ public class DaoProjeto extends DAOJPA<Projeto>{
 	}
 	
 	public List<Projeto> findProjectByPermission(){
-		return (List<Projeto>) super.findAllByQuery("select p from Projeto p where p.permissao = 'Publico'");
+		return (List<Projeto>) super.findAllByQuery("select p from Projeto p where p.permissao = 'Publicado'");
 	}
+	
 }
