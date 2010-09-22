@@ -53,17 +53,12 @@
 							<f:convertDateTime dateStyle="short" />
 						</h:outputText>
 			</rich:column>	
-			<rich:column reRender="#{projeto.permissao == 'Publico'}">
-						<f:facet name="header">
-							<h:outputText value="Permissao " />
-						</f:facet>
-						<h:outputText value="#{projeto.permissao}" />
-			</rich:column>
+			
 			<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Autor " />
 						</f:facet>
-						<h:outputText value="#{projeto.autor}" />
+						<h:outputText value="#{projeto.autor.nome}" />
 			</rich:column>		
 			
 		</rich:dataTable>
