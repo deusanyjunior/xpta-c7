@@ -24,7 +24,7 @@ import br.ufpb.lavid.xpta.model.Projeto;
 public class BeanFile{
 
 	private ArrayList<File2> files = new ArrayList<File2>();
-	private int uploadsAvailable = 1;
+	private int uploadsAvailable = 5;
 	private boolean autoUpload = false;
 	private boolean useFlash = false;
 	private static final String separator = System.getProperty("file.separator");
@@ -44,14 +44,6 @@ public class BeanFile{
 		}
 	}
 	
-	public BeanProjeto getBeanProjeto() {
-		return beanProjeto;
-	}
-
-	public void setBeanProjeto(BeanProjeto beanProjeto) {
-		this.beanProjeto = beanProjeto;
-	}
-
 	public void paint(OutputStream stream, Object object) throws IOException {
 		stream.write(getFiles().get((Integer)object).getData());
 	}
@@ -79,10 +71,10 @@ public class BeanFile{
 				.getExternalContext().getContext();
 		
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        int id = beanProjeto.getProjeto().getCodigo();
+        Projeto projeto = beanProjeto.getProjeto();
+        int id = projeto.getCodigo();
         System.out.print("id!!!!!! ====== " + id);
-        //Projeto projeto = ((BeanProjeto) session. getComponentBean("beanProjeto", BeanProjeto.class)).getProjeto();
-		
+      
 		String filepath = System.getProperty("catalina.base")+separator+"webapps"+separator+"Projetos"+separator + id;
 		filepath = filepath + separator;
 		
@@ -103,15 +95,16 @@ public class BeanFile{
 		fos.close();
 		fis.close();
 		
-		if (beanTrack.novaTrack() == "novaTrack"){
-			beanTrack.salvarTrack(nome, 0,0);
-		}
 		
-}
+		String s = projeto.getNome();
+		System.out.print("Nome!!!! "+ s);
+		beanTrack.invokeMethods(nome, 0, 0, projeto);
+		
+	}
 
 	public String clearUploadData() {
 		files.clear();
-		setUploadsAvailable(1);
+		setUploadsAvailable(5);
 		return null;
 	}
 
@@ -149,6 +142,21 @@ public class BeanFile{
 
 	public void setUseFlash(boolean useFlash) {
 		this.useFlash = useFlash;
+	}
+	
+	public BeanProjeto getBeanProjeto() {
+		return beanProjeto;
+	}
+
+	public void setBeanProjeto(BeanProjeto beanProjeto) {
+		this.beanProjeto = beanProjeto;
+	}
+	public BeanTrack getBeanTrack() {
+		return beanTrack;
+	}
+
+	public void setBeanTrack(BeanTrack beanTrack) {
+		this.beanTrack = beanTrack;
 	}
 
 }

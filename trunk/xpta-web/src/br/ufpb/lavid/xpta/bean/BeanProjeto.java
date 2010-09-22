@@ -14,8 +14,8 @@ public class BeanProjeto {
 
 	private ControllerProjeto controllerProjeto = new ControllerProjeto();
 	private Projeto projeto;
-	private int codprojeto;
-	private BeanFile upFile = new BeanFile();
+	
+	
 	/* ******Chama o m�todo que cria o projeto e seta o usuario nele***** */
 
 	public String invokeMethods(){
@@ -100,14 +100,5 @@ public class BeanProjeto {
 	public void setControllerProjeto(ControllerProjeto controllerProjeto) {
 		this.controllerProjeto = controllerProjeto;
 	}
-
-	public int getCodprojeto() {
-		return codprojeto;
-	}
-
-	public void setCodprojeto(int codprojeto) {
-		this.codprojeto = codprojeto;
-	}
-	
 	
 }
