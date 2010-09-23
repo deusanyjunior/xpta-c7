@@ -12,14 +12,17 @@ import javax.swing.JLabel;
 import javax.swing.JWindow;
 
 public class Controlador extends JWindow implements Runnable {
+	
 	public Scanner scanner = new Scanner(System.in);
 	public String entrada;
 	public ArrayList<Track> lista;
-        public JLabel label = new JLabel();
+	public JLabel label = new JLabel();
+	public ArrayList<ArrayList<Byte>> trackByteArray;
 
 	/**
-	 * A classe controladora de eventos de teclado recebe uma lista com todos os arquivos mp3 que
-	 * serão abertos, e fará o gerenciamento das atividades relacionadas à execução das faixas simultaneamente.
+	 * A classe controladora de eventos de teclado recebe uma lista com todos os
+	 * arquivos mp3 que serão abertos, e fará o gerenciamento das atividades
+	 * relacionadas à execução das faixas simultaneamente.
 	 * 
 	 * @param lista
 	 *            de arquivos mp3.
@@ -29,7 +32,7 @@ public class Controlador extends JWindow implements Runnable {
 
 		// Inicializa a thread do Controlador:
 		new Thread(this).start();
-                add(label);
+		add(label);
 	}
 
 	public void pausar() {
@@ -47,45 +50,58 @@ public class Controlador extends JWindow implements Runnable {
 	}
 
 	public void play() {
-		for (Track mp3 : lista) {
-			new Thread(mp3).start();
+		for (Track t : lista) {
+			new Thread(t).start();
 			label.setText("Play");
 		}
 	}
 
-	public void equalizar()
-	{
-		
-		 float[] equalizar = {-10, -10, -8, 7, 5, 4, 3, 2,
-		 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9,
-		 -10, -11, -12, 8, 9, 10, 11, 10, 12, 4, 4,
-		 3, 2};
-		 
-            for (Track mp3: lista) {
-                    mp3.equalizer(equalizar);
-            }
+	public void equalizar() {
+
+		float[] equalizar = { -10, -10, -8, 7, 5, 4, 3, 2, 1, 0, -1, -2, -3,
+				-4, -5, -6, -7, -8, -9, -10, -11, -12, 8, 9, 10, 11, 10, 12, 4,
+				4, 3, 2 };
+
+		for (Track mp3 : lista) {
+			mp3.equalizer(equalizar);
+		}
 	}
 
-        public void addVolume(int value) {
-            for (Track mp3: lista) {
-                mp3.setVolume(mp3.getVolume()+value);
-            }
-        }
-
+	public void addVolume(int value) {
+		for (Track mp3 : lista) {
+			mp3.setVolume(mp3.getVolume() + value);
+		}
+	}
+	
+	public void loadTrackBytes() {
+		for (Track t: lista) {
+			trackByteArray.add(t.loadByteArray());
+		}
+		imprimeBytes();
+	}
+	
+	public void imprimeBytes() {
+		for (ArrayList<Byte> trackBytes: trackByteArray) {
+			for (Byte b: trackBytes) {
+				System.out.println(b.toString());
+			}
+		}
+	}
 
 	public void run() {
 
 		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-                play();
-                
+		// play();
+
 		while (true) {
 			label.setText("Digite sua opção:");
-                        DataInputStream dis = new DataInputStream(System.in);
-                        try {
-                            entrada = "" + dis.readChar();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+			DataInputStream dis = new DataInputStream(System.in);
+			try {
+				entrada = "" + dis.readChar();
+			} catch (IOException ex) {
+				Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE,
+						null, ex);
+			}
 
 			if (entrada.equalsIgnoreCase("pause")) {
 				label.setText("Pause");
@@ -102,48 +118,61 @@ public class Controlador extends JWindow implements Runnable {
 				addVolume(1);
 			else if (entrada.equalsIgnoreCase("-"))
 				addVolume(-1);
+			else if (entrada.equalsIgnoreCase("load"))
+				loadTrackBytes();
 			else
 				label.setText("Opção inválida.");
 		}
 	}
 
-        /**
-         * Converte utilizando o pacpl todos os áudios da pasta das tracks.
-         * @args diretorioDeEntrada é uma string que representa o diretório que terá recursivamente
-         * todos os arquivos(tracks) interiores a ele convertidos para o formato de saída.
-         * @args diretorioDeSaida diretório para o qual a saída da conversão enviará os novos arquivos.
-         */
-        public static void pacplAll(String diretorioDeEntrada, String diretorioDeSaida, String formato) {
-            try {
-		String commandLine = "pacpl -p -t "+formato+" -r "+diretorioDeEntrada+" --overwrite --outdir diretorioDeSaida";
-		Runtime.getRuntime().exec(commandLine);
-            } catch (IOException e) {
-		System.out.print("pacpl(): "+e.getMessage());
-            }
-        }
+	/**
+	 * Converte utilizando o pacpl todos os áudios da pasta das tracks.
+	 * 
+	 * @args diretorioDeEntrada é uma string que representa o diretório que terá
+	 *       recursivamente todos os arquivos(tracks) interiores a ele
+	 *       convertidos para o formato de saída.
+	 * @args diretorioDeSaida diretório para o qual a saída da conversão enviará
+	 *       os novos arquivos.
+	 */
+	public static void pacplAll(String diretorioDeEntrada,
+			String diretorioDeSaida, String formato) {
+		try {
+			String commandLine = "pacpl -p -t " + formato + " -r "
+					+ diretorioDeEntrada
+					+ " --overwrite --outdir diretorioDeSaida";
+			Runtime.getRuntime().exec(commandLine);
+		} catch (IOException e) {
+			System.out.print("pacpl(): " + e.getMessage());
+		}
+	}
 
-        /**
-         * Converte utilizando o pacpl uma faixa única.
-         * @args inputFile é uma string que representa o arquivo que será convertido.
-         * @args diretorioDeSaida diretório para o qual a saída da conversão enviará o novo arquivo convertido.
-         */
-        public static void pacplOne(String inputFile, String diretorioDeSaida, String formato) {
-            try {
-		String commandLine = "pacpl -p -t "+formato+" --overwrite --outdir diretorioDeSaida "+inputFile;
-		Runtime.getRuntime().exec(commandLine);
-            } catch (IOException e) {
-		System.out.print("pacpl(): "+e.getMessage());
-            }
-        }
+	/**
+	 * Converte utilizando o pacpl uma faixa única.
+	 * 
+	 * @args inputFile é uma string que representa o arquivo que será
+	 *       convertido.
+	 * @args diretorioDeSaida diretório para o qual a saída da conversão enviará
+	 *       o novo arquivo convertido.
+	 */
+	public static void pacplOne(String inputFile, String diretorioDeSaida,
+			String formato) {
+		try {
+			String commandLine = "pacpl -p -t " + formato
+					+ " --overwrite --outdir diretorioDeSaida " + inputFile;
+			Runtime.getRuntime().exec(commandLine);
+		} catch (IOException e) {
+			System.out.print("pacpl(): " + e.getMessage());
+		}
+	}
 
-        public static void main(String args[]) {
+	public static void main(String args[]) {
 
 		// ExecutorService pool = Executors.newFixedThreadPool(3);
 
 		ArrayList<Track> lista = new ArrayList<Track>();
 
                 lista
-				.add(new Mp3(
+				.add(new Track(
 						"/home/pedroguimaraes/Música/Megadeth/Rust In Peace/02. Hangar 18.mp3",
 						0));
 /*
@@ -174,5 +203,4 @@ public class Controlador extends JWindow implements Runnable {
                 */
 
 	}
-
 }
