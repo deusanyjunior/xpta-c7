@@ -59,7 +59,14 @@
 							<h:outputText value="Autor " />
 						</f:facet>
 						<h:outputText value="#{projeto.autor.nome}" />
-			</rich:column>		
+			</rich:column>	
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Informações" />
+						</f:facet>
+						<h:commandLink value="Saiba mais" action="#{projetoB.retornaProjeto}" />
+					
+			</rich:column>	
 			
 		</rich:dataTable>
 	</fieldset>
