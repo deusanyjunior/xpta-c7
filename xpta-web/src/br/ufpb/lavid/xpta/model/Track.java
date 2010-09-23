@@ -27,7 +27,7 @@ public class Track {
 	private HashMap audio = new HashMap();
 	
 	
-	private int projetos;
+	private int projeto;
 
 	public Track() {
 
@@ -88,12 +88,12 @@ public class Track {
 		this.audio = audio;
 	}
 
-	public int getProjetos() {
-		return projetos;
+	public int getProjeto() {
+		return projeto;
 	}
 
-	public void setProjetos(int projetos) {
-		this.projetos = projetos;
+	public void setProjeto(int projeto) {
+		this.projeto = projeto;
 	}	
 	
 }

@@ -7,18 +7,18 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity(name ="Usuario")
 @DiscriminatorValue("U")
 public class Usuario extends Pessoa{
 	
-	@ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-	private List<Projeto> projetos = new ArrayList<Projeto>();
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
-	@OneToMany
-	private List<Projeto> autorDoProjeto;
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	private List<Projeto> projetosAutor;
+	
 	public Usuario(){
 		
 	}
@@ -27,21 +27,28 @@ public class Usuario extends Pessoa{
 		super();
 	}
 
-	public List<Projeto> getProjetos() {
-		return projetos;
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
 
-	public void setProjetos(List<Projeto> projetos) {
-		this.projetos = projetos;
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
-	public List<Projeto> getAutorDoProjeto() {
-		return autorDoProjeto;
+	public List<Projeto> getProjetosAutor() {
+		return projetosAutor;
 	}
 
-	public void setAutorDoProjeto(List<Projeto> autorDoProjeto) {
-		this.autorDoProjeto = autorDoProjeto;
+	public void setProjetosAutor(List<Projeto> projetosAutor) {
+		this.projetosAutor = projetosAutor;
 	}
 	
+	public void addProjeto(Projeto p){
+		this.projetosAutor.add(p);
+	}
 	
+	public void addPedidoUsuario(Pedido pedido){
+		this.pedidos.add(pedido);
+	}
+
 }
