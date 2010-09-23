@@ -10,9 +10,8 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.lang.Object;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
+
+
 
 import org.ajax4jsf.util.base64.EncoderException;
 import org.richfaces.event.UploadEvent;
@@ -67,10 +66,7 @@ public class BeanFile{
 	FileNotFoundException, IllegalArgumentException,
 	IllegalFormatException, EncoderException {
 		
-		ServletContext sc = (ServletContext) FacesContext.getCurrentInstance()
-				.getExternalContext().getContext();
-		
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        //HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         Projeto projeto = beanProjeto.getProjeto();
         int id = projeto.getCodigo();
         System.out.print("id!!!!!! ====== " + id);
@@ -85,6 +81,7 @@ public class BeanFile{
 		int chunkSize = 8 * 1024 * 1024;
 		long position = 0;
 		long bytesLeft = totalLength;
+		@SuppressWarnings("unused")
 		long totalWritten = 0;
 		for (position = 0; position < totalLength; position += chunkSize) {
 			long bytesToWrite = Math.min(bytesLeft, chunkSize);

@@ -16,7 +16,7 @@ public class BeanTrack {
 			this.track.setNome(nome);
 			this.track.setVolume(volume);
 			this.track.setPan(pan);
-			this.track.setProjetos(projeto.getCodigo());
+			this.track.setProjeto(projeto.getCodigo());
 			salvarTrack(track);
 		return "sucesso";
 		} catch (Exception e) {
