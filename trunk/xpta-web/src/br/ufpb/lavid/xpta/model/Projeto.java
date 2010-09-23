@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -44,8 +43,8 @@ public class Projeto {
 	@Temporal(TemporalType.DATE)
 	private Date dataUltimaModificacao;
 	
-	@ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-	private List<Usuario> usuario;
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	private List<Pedido> pedidos;
 	
 	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private List<Track> trackDeAudio = new ArrayList<Track>();
@@ -100,11 +99,11 @@ public class Projeto {
 		this.permissao = permissao;
 	}
 	
-	public List<Usuario> getUsuario() {
-		return usuario;
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
+	public void setUsuario(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	public List<Track> getTrackDeAudio() {
 		return trackDeAudio;
@@ -122,5 +121,8 @@ public class Projeto {
 		this.autor = autor;
 	}
 	
+	public void addPedidoProjeto(Pedido pedido){
+		this.pedidos.add(pedido);
+	}
 	
 }
