@@ -6,6 +6,7 @@
 		<managed-bean-name>projetoB</managed-bean-name>
 		<managed-bean-class>br.ufpb.lavid.xpta.bean.BeanProjeto</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
+		
 	</managed-bean>
 	
 	<managed-bean>
@@ -37,6 +38,16 @@
 		<managed-property>
 			<property-name>beanTrack</property-name>
 			<value>#{trackB}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>pedidoB</managed-bean-name>
+		<managed-bean-class>br.ufpb.lavid.xpta.bean.BeanPedido</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+		 <property-name>beanProjeto</property-name>
+		 <value>#{projetoB}</value>
 		</managed-property>
 	</managed-bean>
 	
@@ -86,6 +97,19 @@
 		<navigation-case>
 			<from-outcome>projetosalvo</from-outcome>
 			<to-view-id>/sucesso.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Informações do projeto -->	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>sair</from-outcome>
+			<to-view-id>/home.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>projetoSelecionado</from-outcome>
+			<to-view-id>/informacoesProjeto.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

@@ -47,4 +47,16 @@
   SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#cadastroProjetos.xhtml"
   PATH="/cadastroProjetos.xhtml" SHAPE="240,513,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:5" PATH="*" SHAPE="32,609,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:5" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="sair::#home.xhtml" NAME="output"
+    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="sair" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="projetoSelecionado::#informacoesProjeto.xhtml" NAME="output1"
+    PATH="/informacoesProjeto.xhtml"
+    TARGET="rules:#informacoesProjeto.xhtml" TITLE="projetoSelecionado" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#informacoesProjeto.xhtml"
+  PATH="/informacoesProjeto.xhtml" SHAPE="256,625,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
