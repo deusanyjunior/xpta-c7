@@ -7,9 +7,9 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
 
-import br.ufpb.lavid.xpta.dao.DaoPessoa;
 import br.ufpb.lavid.xpta.dao.DaoUsuario;
-import br.ufpb.lavid.xpta.model.Pessoa;
+import br.ufpb.lavid.xpta.model.Pedido;
+import br.ufpb.lavid.xpta.model.Projeto;
 import br.ufpb.lavid.xpta.model.Usuario;
 
 public class ControllerUsuario {
@@ -113,4 +113,16 @@ public class ControllerUsuario {
         session.removeAttribute("user"); 
         return "sair"; 
     }
+	
+	public void addProjeto(Usuario  u, Projeto p){
+		u.addProjeto(p);
+		System.out.print("dentro do controller");
+		salvarUsuario(u);
+		System.out.print("depois de salvar o usuario");
+	}
+	
+	public void addPedidoUsuario(Usuario user ,Pedido pedido){
+		user.addPedidoUsuario(pedido);
+		salvarUsuario(user);
+	}
 }
