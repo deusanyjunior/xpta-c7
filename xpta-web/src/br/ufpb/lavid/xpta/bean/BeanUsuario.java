@@ -6,8 +6,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.ufpb.lavid.xpta.controller.ControllerUsuario;
-import br.ufpb.lavid.xpta.dao.DaoPessoa;
-import br.ufpb.lavid.xpta.model.Pessoa;
+import br.ufpb.lavid.xpta.model.Projeto;
 import br.ufpb.lavid.xpta.model.Usuario;
 
 public class BeanUsuario {
@@ -61,6 +60,16 @@ public class BeanUsuario {
 		return controllerUsuario.logout();
 	}
 	
+	public void addProjetoUsuario(Projeto p){
+		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Usuario user = (Usuario)session.getAttribute("user");
+		System.out.print("Usuario " + user.getNome());
+		controllerUsuario.addProjeto(user, p);
+		System.out.print("depois do controller!!!!!");
+		
+	}
+	
 /* ************** Getters and Setters ************** */
 	
 	public Usuario getUsuario() {
@@ -82,8 +91,7 @@ public class BeanUsuario {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
-	
+		
 	public ControllerUsuario getControllerUsuario() {
 		return controllerUsuario;
 	}

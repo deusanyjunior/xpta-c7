@@ -7,6 +7,7 @@ import javax.faces.model.DataModel;
 import javax.servlet.http.HttpSession;
 
 import br.ufpb.lavid.xpta.controller.ControllerProjeto;
+import br.ufpb.lavid.xpta.controller.ControllerUsuario;
 import br.ufpb.lavid.xpta.model.Projeto;
 import br.ufpb.lavid.xpta.model.Usuario;
 
@@ -14,13 +15,13 @@ public class BeanProjeto {
 
 	private ControllerProjeto controllerProjeto = new ControllerProjeto();
 	private Projeto projeto;
-	
-	
+	private ControllerUsuario controllerUsuario = new ControllerUsuario();
+	private HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+	private Usuario user = (Usuario)session.getAttribute("user");
 	/* ******Chama o m�todo que cria o projeto e seta o usuario nele***** */
 
 	public String invokeMethods(){
 		novoProjeto();
-	
 		setarUsuarioProjeto();
 		return "novoProjeto"; 
 	}
@@ -30,23 +31,24 @@ public class BeanProjeto {
 	public String novoProjeto(){
 		this.projeto = new Projeto();
 		projeto.setDataCriacao(new Date());
-		
 		return "novoProjeto";
 	}
 	
 	/* ******Seta usu�rio no projeto****** */
 	
 	public void setarUsuarioProjeto(){
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		Usuario user = (Usuario)session.getAttribute("user");
+		
 		projeto.setAutor(user);
 	}
+	
+	
 	
 	/* ******Chama o m�todo do controller para salvar o projeto***** */
 	public String cadastrarProjeto(){
 	
 		controllerProjeto.salvarProjeto(this.projeto);
 		criarPasta(this.projeto);
+		addProjetosUsuario(this.projeto);
 		return "projetosalvo";
 	}
 	
@@ -62,8 +64,18 @@ public class BeanProjeto {
 		return controllerProjeto.excluirProjeto(projeto);
 	}
 	
+	/* Adiciona o projeto a lista de projetos do usuário*/
+	
+	public void addProjetosUsuario(Projeto p){
+		System.out.print("antes de chamar o bean");
+		controllerUsuario.addProjeto(user, p);
+		System.out.print("\n\n depois de chamar o bean " );
+	}
+	
+	/* *******Cria uma nova pasta do projeto **********/
+	
 	public String criarPasta(Projeto projeto){
-		System.out.print("antes de criar a pasta ");
+		
 		
 			java.io.File pasta = new java.io.File("/var/lib/tomcat6/webapps/Projetos/" + projeto.getCodigo());
 			if (pasta.mkdir()){
@@ -73,8 +85,11 @@ public class BeanProjeto {
 				return "pasta nao criada";
 	
 	}
-	public Projeto retornaProjeto(){
-		return projeto;
+	
+	public String retornaProjeto(){
+		this.projeto = controllerProjeto.retornaProjeto();
+		return "projetoSelecionado";
+		
 	}
 	
 	
