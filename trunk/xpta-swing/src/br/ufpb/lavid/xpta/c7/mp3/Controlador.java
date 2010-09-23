@@ -142,10 +142,11 @@ public class Controlador extends JWindow implements Runnable {
 
 		ArrayList<Track> lista = new ArrayList<Track>();
 
-               /* lista
+                lista
 				.add(new Mp3(
-						"/media/FEC2-0D20/mp3/A/Annihilator/Schizo Deluxe/Annihilator - 03 - Warbird.mp3",
+						"/home/pedroguimaraes/Música/Megadeth/Rust In Peace/02. Hangar 18.mp3",
 						0));
+/*
 		lista
 				.add(new Mp3(
 						"/media/FEC2-0D20/mp3/A/Annihilator/Schizo Deluxe/Annihilator - 02 - Drive.mp3",
@@ -163,7 +164,7 @@ public class Controlador extends JWindow implements Runnable {
 		
 		lista
 		.add(new Track(itunes+"Dead Fish/Afasia/09 Noite.mp3"));
-
+*/
 		// Cria um novo controlador com a lista de músicas a serem executadas:
 		Controlador c = new Controlador(lista);
 
