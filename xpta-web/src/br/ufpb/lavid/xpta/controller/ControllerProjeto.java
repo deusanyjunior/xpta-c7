@@ -4,7 +4,9 @@ import java.util.Date;
 
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+
 import br.ufpb.lavid.xpta.dao.DaoProjeto;
+import br.ufpb.lavid.xpta.model.Pedido;
 import br.ufpb.lavid.xpta.model.Projeto;
 
 public class ControllerProjeto {
@@ -82,6 +84,17 @@ public class ControllerProjeto {
 		}
 	
 		return "projetoExcluido";
+	}
+	
+	public void addPedidoProjeto(Projeto p, Pedido pedido){
+		p.addPedidoProjeto(pedido);
+		salvarProjeto(p);
+		
+	}
+	
+public Projeto retornaProjeto(){
+	Projeto projeto = (Projeto) dataModel.getRowData();
+	return projeto;
 	}
 	
 }
