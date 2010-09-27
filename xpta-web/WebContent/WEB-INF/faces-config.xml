@@ -104,12 +104,24 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>sair</from-outcome>
-			<to-view-id>/home.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-outcome>projetoSelecionado</from-outcome>
 			<to-view-id>/informacoesProjeto.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>usuarioNaoLogado</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>usuarioLogado</from-outcome>
+			<to-view-id>/sucesso.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
