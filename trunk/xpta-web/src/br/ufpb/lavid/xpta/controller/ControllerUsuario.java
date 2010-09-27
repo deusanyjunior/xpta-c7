@@ -125,4 +125,10 @@ public class ControllerUsuario {
 		user.addPedidoUsuario(pedido);
 		salvarUsuario(user);
 	}
+	
+	public Usuario retornaUsuario(){
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Usuario user = (Usuario)session.getAttribute("user");
+		return user;
+	}
 }
