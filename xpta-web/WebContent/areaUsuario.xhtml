@@ -18,18 +18,11 @@
 		<br></br>
 		<br></br>
 		<h:commandButton value="novo" action="#{projetoB.invokeMethods}" />
-
-
-		<fieldset style="height: 95%"><legend>Projetos</legend> <rich:dataTable
-			value="#{projetoB.listaProjeto}" var="projeto"
-			id="listaProjetoUsuario">
-			<rich:column filterBy="#{projeto.codigo}" filterEvent="onkeyup"
-				sortBy="#{projeto.codigo}">
-				<f:facet name="header">
-					<h:outputText value="Codigo" />
-				</f:facet>
-				<h:outputText value="#{projeto.codigo}" action="" />
-			</rich:column>
+		<h:outputLink value="exibirOutrosProjetos.xpta">+Projetos</h:outputLink>
+		<br></br>
+		<fieldset style="height: 60%"><legend>Meus Projetos</legend> 
+		<rich:dataTable value="#{projetoB.listaMeusProjetos}" var="projeto" id="listaProjeto">
+		
 			<rich:column>
 				<f:facet name="header">
 					<h:outputText value="Nome " />
@@ -64,14 +57,67 @@
 				</f:facet>
 				<h:outputText value="#{projeto.permissao}" />
 			</rich:column>
+		</rich:dataTable></fieldset>
+		
+		<br></br>
+		<br></br>
+		
+		<fieldset style="height: 60%"><legend>Projetos Editáveis</legend> <rich:dataTable
+			value="#{projetoB.listaProjeto}" var="projeto"
+			id="listaProjetoUsuarioEditavel">
+			
 			<rich:column>
 				<f:facet name="header">
-					<h:outputText value="Autor " />
+					<h:outputText value="Nome " />
 				</f:facet>
-
+				<h:outputText value="#{projeto.nome}" />
 			</rich:column>
-
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Descricacao " />
+				</f:facet>
+				<h:outputText value="#{projeto.descricaoFormato}" />
+			</rich:column>
+			<rich:column sortBy="#{projeto.dataCriacao}">
+				<f:facet name="header">
+					<h:outputText value="Data da Criacao " />
+				</f:facet>
+				<h:outputText value="#{projeto.dataCriacao}">
+					<f:convertDateTime dateStyle="short" />
+				</h:outputText>
+			</rich:column>
+			<rich:column sortBy="#{projeto.dataUltimaModificacao}">
+				<f:facet name="header">
+					<h:outputText value="Ultima modificacao " />
+				</f:facet>
+				<h:outputText value="#{projeto.dataUltimaModificacao}">
+					<f:convertDateTime dateStyle="short" />
+				</h:outputText>
+			</rich:column>
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Autor " />
+						</f:facet>
+						<h:outputText value="#{projeto.autor.nome}" />
+			</rich:column>
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Editores " />
+						</f:facet>
+						
+			</rich:column>		
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Informações" />
+						</f:facet>
+						<h:commandLink value="Saiba mais" action="#{projetoB.retornaProjeto}" />
+					
+			</rich:column>	
+				
 		</rich:dataTable></fieldset>
+		<br></br>
+		<br></br>
+		
 	</h:form>
 	</body>
 	
