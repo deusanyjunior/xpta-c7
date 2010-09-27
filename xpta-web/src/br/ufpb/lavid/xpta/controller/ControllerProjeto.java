@@ -4,10 +4,12 @@ import java.util.Date;
 
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.xml.crypto.Data;
 
 import br.ufpb.lavid.xpta.dao.DaoProjeto;
 import br.ufpb.lavid.xpta.model.Pedido;
 import br.ufpb.lavid.xpta.model.Projeto;
+import br.ufpb.lavid.xpta.model.Usuario;
 
 public class ControllerProjeto {
 
@@ -92,9 +94,25 @@ public class ControllerProjeto {
 		
 	}
 	
-public Projeto retornaProjeto(){
-	Projeto projeto = (Projeto) dataModel.getRowData();
-	return projeto;
+	public Projeto retornaProjeto(){
+		Projeto projeto = (Projeto) dataModel.getRowData();
+		return projeto;
 	}
 	
+	public DataModel listaMeusProjetos(Usuario user){
+		System.out.print("\nAcessou o controller e chamou o dao");
+		dataModel = new ListDataModel(daoProjeto.findProjectByAutor(user.getCodigo()));
+		System.out.print("\ndepois do dao");
+		return dataModel;
+	}
+	
+	public DataModel listaProjetosParaEdicao(Usuario user){
+		dataModel = new ListDataModel(daoProjeto.findProjectEdition(user));
+		return dataModel;
+	}
+	
+	public DataModel listaOutrosProjetos(Usuario user){
+		dataModel = new ListDataModel(daoProjeto.findOtherProject(user));
+		return dataModel;
+	}
 }
