@@ -3,6 +3,7 @@ package br.ufpb.lavid.xpta.dao;
 import java.util.List;
 
 import br.ufpb.lavid.xpta.model.Projeto;
+import br.ufpb.lavid.xpta.model.Usuario;
 
 public class DaoProjeto extends DAOJPA<Projeto>{
 
@@ -25,12 +26,23 @@ public class DaoProjeto extends DAOJPA<Projeto>{
 		return (List<Projeto>) super.findAllByQuery("select p from Projeto p where p.permissao = '" + permissao + "'");
 	}
 	
-	public List<Projeto> findProjectByDono(int id){
-		return (List<Projeto>) super.findAllByQuery("select p from Projeto p where p.dono = "+ id);
+	public List<Projeto> findProjectByAutor(int id){
+		return (List<Projeto>) super.findAllByQuery("select p from Projeto p where p.autor.codigo = " + id);
 	}
 	
 	public List<Projeto> findProjectByPermission(){
 		return (List<Projeto>) super.findAllByQuery("select p from Projeto p where p.permissao = 'Publicado'");
 	}
 	
+	public List<Projeto> findProjectEditors(Usuario user){
+		return (List<Projeto>) super.findAllByQuery("select p from Pedido p where p.usuario.codigo = " + user.getCodigo() + "and status = true");
+	}
+	
+	public List<Projeto> findProjectEdition(Usuario user){
+		return (List<Projeto>) super.findAllByQuery("select p from Pedido p where p.usuario.codigo = " + user.getCodigo() + "and status = false");
+	}
+	
+	public List<Projeto> findOtherProject(Usuario user){
+		return (List<Projeto>) super.findAllByQuery("Select p from Pedido p where p.usuario.codigo <> " + user.getCodigo() + "and p.projeto.autor.codigo <> " + user.getCodigo());
+	}
 }
