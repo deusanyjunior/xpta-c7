@@ -1,7 +1,7 @@
 package br.ufpb.lavid.xpta.bean;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
+import javax.faces.model.DataModel;
+
 import br.ufpb.lavid.xpta.controller.ControllerPedido;
 import br.ufpb.lavid.xpta.controller.ControllerProjeto;
 import br.ufpb.lavid.xpta.controller.ControllerUsuario;
@@ -16,15 +16,16 @@ public class BeanPedido {
 	private ControllerUsuario controllerUsuario = new ControllerUsuario();
 	private ControllerProjeto controllerProjeto = new ControllerProjeto();
 	private BeanProjeto beanProjeto;
-	private HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	private Usuario user = (Usuario)session.getAttribute("user");
-	private Projeto projeto = beanProjeto.getProjeto();
 	private Pedido pedido;
-	
+	private Projeto projeto;
 	
 	public String invokeMethods(){
+		System.out.print("antes de instanciar o novo pedido");
 		novoPedido();
-		if (setarUsuarioPedido() == "usuarioLogado"){
+		String resultado = setarUsuarioPedido();
+		System.out.print("resultado: " + resultado);
+		if ( resultado == "usuarioLogado"){
+			
 			setarProjetoPedido();
 			salvarPedido(this.pedido);
 			return "pedidoSalvo";
@@ -35,9 +36,9 @@ public class BeanPedido {
 		
 	}
 	
-	public String novoPedido(){
+	public void novoPedido(){
 		this.pedido = new Pedido();
-		return "novoPedido";
+		//return "novoPedido";
 	}
 	
 	public String salvarPedido(Pedido pedido){
@@ -49,27 +50,48 @@ public class BeanPedido {
 	}
 	
 	public void setarProjetoPedido(){
-		this.pedido.setProjeto(projeto);
+		this.pedido.setProjeto(retornaProjeto());
 	}
 				
 	public String setarUsuarioPedido(){
-		if (user == null){
+		if (retornaUsuario() == null){
+			System.out.print("Usuario não logado!!!");
 			return "usuarioNaoLogado";
 		}else{
-			this.pedido.setUsuario(user);
+			this.pedido.setUsuario(retornaUsuario());
 			return "usuarioLogado";
 		}
 		
 	}
 	
+	public Usuario retornaUsuario(){
+		return controllerUsuario.retornaUsuario();
+	}
+	
+	public Projeto retornaProjeto(){
+		return this.projeto = beanProjeto.getProjeto();
+
+		
+	}
+	
 	public void addPedidoUsuario(Pedido pedido){
-		controllerUsuario.addPedidoUsuario(user, pedido);
+		controllerUsuario.addPedidoUsuario(retornaUsuario(), pedido);
 	}
 	
 	public void addPedidoProjeto(Pedido pedido){
-		controllerProjeto.addPedidoProjeto(projeto, pedido);
+		controllerProjeto.addPedidoProjeto(retornaProjeto(), pedido);
+	}
+	
+	public DataModel getListaPedidosPendentes(){
+		Usuario user = retornaUsuario();
+		System.out.print("|||||||" + user.getNome() + "||||||||$$$$");
+		
+		return controllerPedido.listaPedidosPendentes(user);
 	}
 
+	
+	//Getters and Setters...
+	
 	public ControllerPedido getControllerPedido() {
 		return controllerPedido;
 	}
@@ -100,22 +122,6 @@ public class BeanPedido {
 
 	public void setBeanProjeto(BeanProjeto beanProjeto) {
 		this.beanProjeto = beanProjeto;
-	}
-
-	public HttpSession getSession() {
-		return session;
-	}
-
-	public void setSession(HttpSession session) {
-		this.session = session;
-	}
-
-	public Usuario getUser() {
-		return user;
-	}
-
-	public void setUser(Usuario user) {
-		this.user = user;
 	}
 
 	public Projeto getProjeto() {

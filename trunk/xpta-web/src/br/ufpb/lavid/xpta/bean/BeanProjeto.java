@@ -2,9 +2,9 @@ package br.ufpb.lavid.xpta.bean;
 
 import java.util.Date;
 
-import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
-import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
+
 
 import br.ufpb.lavid.xpta.controller.ControllerProjeto;
 import br.ufpb.lavid.xpta.controller.ControllerUsuario;
@@ -16,8 +16,7 @@ public class BeanProjeto {
 	private ControllerProjeto controllerProjeto = new ControllerProjeto();
 	private Projeto projeto;
 	private ControllerUsuario controllerUsuario = new ControllerUsuario();
-	private HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	private Usuario user = (Usuario)session.getAttribute("user");
+	//private Usuario user;
 	/* ******Chama o m�todo que cria o projeto e seta o usuario nele***** */
 
 	public String invokeMethods(){
@@ -38,7 +37,7 @@ public class BeanProjeto {
 	
 	public void setarUsuarioProjeto(){
 		
-		projeto.setAutor(user);
+		projeto.setAutor(retornaUsuario());
 	}
 	
 	
@@ -68,7 +67,7 @@ public class BeanProjeto {
 	
 	public void addProjetosUsuario(Projeto p){
 		System.out.print("antes de chamar o bean");
-		controllerUsuario.addProjeto(user, p);
+		controllerUsuario.addProjeto(retornaUsuario(), p);
 		System.out.print("\n\n depois de chamar o bean " );
 	}
 	
@@ -92,22 +91,46 @@ public class BeanProjeto {
 		
 	}
 	
+	public Usuario retornaUsuario(){
+		return controllerUsuario.retornaUsuario();
+	}
+	
+	public DataModel getListaMeusProjetos(){
+		System.out.print("Acessou o bean e chamou o controller ");
+		//this.user = retornaUsuario();
+		return controllerProjeto.listaMeusProjetos(retornaUsuario());
+	}
+	
+	public DataModel getListaProjetosPublicos(){
+	
+		return controllerProjeto.listaProjetosPublicos();
+	}
+	
+	public DataModel getListaOutrosProjetos(){
+		Usuario user = retornaUsuario();
+		return controllerProjeto.listaOutrosProjetos(user);
+	}
+	
+	public DataModel getListaProjetosParaEdicao(){
+		Usuario user  = retornaUsuario();
+		return controllerProjeto.listaProjetosParaEdicao(user);
+	}
+	
 	
 	/* ************** Getters and Setters ************** */
 
 	public Projeto getProjeto() {
 		return projeto;
 	}
+	
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
-	
-	public DataModel getListaProjetosPublicos(){
-		return controllerProjeto.listaProjetosPublicos();
-	}
+		
 	public DataModel getListaProjeto(){
 		return controllerProjeto.listaProjetos();
 	}
+
 	public ControllerProjeto getControllerProjeto() {
 		return controllerProjeto;
 	}
