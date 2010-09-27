@@ -11,100 +11,89 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
-public class Controlador extends JWindow implements Runnable {
-	
-	public Scanner scanner = new Scanner(System.in);
+public class Controlador implements Runnable {
+
+	public Scanner scanner;
 	public String entrada;
 	public ArrayList<Track> lista;
-	public JLabel label = new JLabel();
-	public ArrayList<ArrayList<Byte>> trackByteArray;
+        public JLabel label = new JLabel();
 
 	/**
-	 * A classe controladora de eventos de teclado recebe uma lista com todos os
-	 * arquivos mp3 que serão abertos, e fará o gerenciamento das atividades
-	 * relacionadas à execução das faixas simultaneamente.
-	 * 
+	 * A classe controladora de eventos de teclado recebe uma lista com todos os arquivos mp3 que
+	 * serão abertos, e fará o gerenciamento das atividades relacionadas à execução das faixas simultaneamente.
+	 *
 	 * @param lista
 	 *            de arquivos mp3.
 	 */
 	public Controlador(ArrayList<Track> lista) {
+        scanner = new Scanner(System.in);
 		this.lista = lista;
-
 		// Inicializa a thread do Controlador:
 		new Thread(this).start();
-		add(label);
 	}
 
 	public void pausar() {
 		for (Track mp3 : lista) {
 			mp3.pause();
-			label.setText("Pausado");
+			System.out.println("Pausado");
 		}
 	}
 
 	public void resumir() {
 		for (Track mp3 : lista) {
 			mp3.resume();
-			label.setText("Resumiu");
+			System.out.println("Resumiu");
 		}
 	}
 
 	public void play() {
-		for (Track t : lista) {
-			new Thread(t).start();
-			label.setText("Play");
-		}
-	}
-
-	public void equalizar() {
-
-		float[] equalizar = { -10, -10, -8, 7, 5, 4, 3, 2, 1, 0, -1, -2, -3,
-				-4, -5, -6, -7, -8, -9, -10, -11, -12, 8, 9, 10, 11, 10, 12, 4,
-				4, 3, 2 };
-
 		for (Track mp3 : lista) {
-			mp3.equalizer(equalizar);
+			new Thread(mp3).start();
+			System.out.println("Playing:");
 		}
 	}
 
-	public void addVolume(int value) {
-		for (Track mp3 : lista) {
-			mp3.setVolume(mp3.getVolume() + value);
-		}
+	public void equalizar()
+	{
+
+		 float[] equalizar = {-10, -10, -8, 7, 5, 4, 3, 2,
+		 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9,
+		 -10, -11, -12, 8, 9, 10, 11, 10, 12, 4, 4,
+		 3, 2};
+
+            for (Track mp3: lista) {
+                    mp3.equalizer(equalizar);
+            }
 	}
-	
-	public void loadTrackBytes() {
-		for (Track t: lista) {
-			trackByteArray.add(t.loadByteArray());
-		}
-		imprimeBytes();
-	}
-	
-	public void imprimeBytes() {
-		for (ArrayList<Byte> trackBytes: trackByteArray) {
-			for (Byte b: trackBytes) {
-				System.out.println(b.toString());
-			}
-		}
-	}
+
+        public void addVolume(int value) {
+            for (Track mp3: lista) {
+                mp3.setVolume(mp3.getVolume()+value);
+            }
+        }
+
+        public void load() {
+            byte[] byteArrayList;
+            for (Track t: lista) {
+                byteArrayList = t.loadTrackByteArray();
+                for (byte b: byteArrayList)
+                    System.out.print(b);
+                System.out.println();
+            }
+        }
 
 	public void run() {
 
 		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-		// play();
-
+                System.out.println("Max memory: " + Runtime.getRuntime().maxMemory() / 1000000 + "MB");
+                System.out.println("Free memory: " + Runtime.getRuntime().freeMemory()/ 1000000 + "MB");
+                System.out.println("Total memory: " + Runtime.getRuntime().totalMemory()/ 1000000 + "MB");
 		while (true) {
-			label.setText("Digite sua opção:");
-			DataInputStream dis = new DataInputStream(System.in);
-			try {
-				entrada = "" + dis.readChar();
-			} catch (IOException ex) {
-				Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE,
-						null, ex);
-			}
+			System.out.println("Digite sua opção:");
+			entrada = scanner.nextLine();
 
 			if (entrada.equalsIgnoreCase("pause")) {
-				label.setText("Pause");
+
 				pausar();
 			} else if (entrada.equalsIgnoreCase("resume"))
 				resumir();
@@ -118,65 +107,52 @@ public class Controlador extends JWindow implements Runnable {
 				addVolume(1);
 			else if (entrada.equalsIgnoreCase("-"))
 				addVolume(-1);
-			else if (entrada.equalsIgnoreCase("load"))
-				loadTrackBytes();
+                        else if (entrada.equalsIgnoreCase("load"))
+                            load();
 			else
-				label.setText("Opção inválida.");
+				System.out.println("Opção inválida.");
 		}
 	}
 
-	/**
-	 * Converte utilizando o pacpl todos os áudios da pasta das tracks.
-	 * 
-	 * @args diretorioDeEntrada é uma string que representa o diretório que terá
-	 *       recursivamente todos os arquivos(tracks) interiores a ele
-	 *       convertidos para o formato de saída.
-	 * @args diretorioDeSaida diretório para o qual a saída da conversão enviará
-	 *       os novos arquivos.
-	 */
-	public static void pacplAll(String diretorioDeEntrada,
-			String diretorioDeSaida, String formato) {
-		try {
-			String commandLine = "pacpl -p -t " + formato + " -r "
-					+ diretorioDeEntrada
-					+ " --overwrite --outdir diretorioDeSaida";
-			Runtime.getRuntime().exec(commandLine);
-		} catch (IOException e) {
-			System.out.print("pacpl(): " + e.getMessage());
-		}
-	}
+        /**
+         * Converte utilizando o pacpl todos os áudios da pasta das tracks.
+         * @args diretorioDeEntrada é uma string que representa o diretório que terá recursivamente
+         * todos os arquivos(tracks) interiores a ele convertidos para o formato de saída.
+         * @args diretorioDeSaida diretório para o qual a saída da conversão enviará os novos arquivos.
+         */
+        public static void pacplAll(String diretorioDeEntrada, String diretorioDeSaida, String formato) {
+            try {
+		String commandLine = "pacpl -p -t "+formato+" -r "+diretorioDeEntrada+" --overwrite --outdir diretorioDeSaida";
+		Runtime.getRuntime().exec(commandLine);
+            } catch (IOException e) {
+		System.out.print("pacpl(): "+e.getMessage());
+            }
+        }
 
-	/**
-	 * Converte utilizando o pacpl uma faixa única.
-	 * 
-	 * @args inputFile é uma string que representa o arquivo que será
-	 *       convertido.
-	 * @args diretorioDeSaida diretório para o qual a saída da conversão enviará
-	 *       o novo arquivo convertido.
-	 */
-	public static void pacplOne(String inputFile, String diretorioDeSaida,
-			String formato) {
-		try {
-			String commandLine = "pacpl -p -t " + formato
-					+ " --overwrite --outdir diretorioDeSaida " + inputFile;
-			Runtime.getRuntime().exec(commandLine);
-		} catch (IOException e) {
-			System.out.print("pacpl(): " + e.getMessage());
-		}
-	}
+        /**
+         * Converte utilizando o pacpl uma faixa única.
+         * @args inputFile é uma string que representa o arquivo que será convertido.
+         * @args diretorioDeSaida diretório para o qual a saída da conversão enviará o novo arquivo convertido.
+         */
+        public static void pacplOne(String inputFile, String diretorioDeSaida, String formato) {
+            try {
+		String commandLine = "pacpl -p -t "+formato+" --overwrite --outdir diretorioDeSaida "+inputFile;
+		Runtime.getRuntime().exec(commandLine);
+            } catch (IOException e) {
+		System.out.print("pacpl(): "+e.getMessage());
+            }
+        }
 
-	public static void main(String args[]) {
+        public static void main(String args[]) {
 
 		// ExecutorService pool = Executors.newFixedThreadPool(3);
 
-		ArrayList<Track> lista = new ArrayList<Track>();
+	ArrayList<Track> lista = new ArrayList<Track>();
 
-                lista
-				.add(new Track(
-						"/home/pedroguimaraes/Música/Megadeth/Rust In Peace/02. Hangar 18.mp3",
-						0));
-/*
-		lista
+        //lista.add(new Track("/home/pedroguimaraes/Download/mp3/02.mp3"));
+        lista.add(new Track("/media/3B07-C7C6/Mp3/Metallica - The Black Album (1991)/01 - Enter Sandman.mp3"));
+
+		/*lista
 				.add(new Mp3(
 						"/media/FEC2-0D20/mp3/A/Annihilator/Schizo Deluxe/Annihilator - 02 - Drive.mp3",
 						0));
@@ -190,17 +166,12 @@ public class Controlador extends JWindow implements Runnable {
 
 		lista
 		.add(new Track(itunes+"Dead Fish/Afasia/01 Afasia.mp3"));
-		
+
 		lista
 		.add(new Track(itunes+"Dead Fish/Afasia/09 Noite.mp3"));
-*/
+                */
 		// Cria um novo controlador com a lista de músicas a serem executadas:
 		Controlador c = new Controlador(lista);
-
-                c.setSize(400,400);
-                c.setVisible(true);
-                *
-                */
-
 	}
+
 }
