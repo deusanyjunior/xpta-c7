@@ -1,5 +1,6 @@
 package br.ufpb.lavid.xpta.c7.services;
 
+import br.ufpb.lavid.xpta.c7.mp3.Track;
 import java.util.ArrayList;
 
 /**
@@ -27,27 +28,17 @@ public class Testes {
 			for (String ss: s)
 				System.out.println(ss);
 		*/
-		
-		ArrayList<Byte> song1 = new ArrayList<Byte>();
-		song1.add(new Byte("32"));
-		song1.add(new Byte("22"));
-		song1.add(new Byte("-119"));
-		song1.add(new Byte("45"));
-		song1.add(new Byte("-12"));
-		
-		ArrayList<Byte> song2 = new ArrayList<Byte>();
-		song2.add(new Byte("52"));
-		song2.add(new Byte("42"));
-		song2.add(new Byte("-19"));
-		song2.add(new Byte("65"));
-		song2.add(new Byte("-72"));
-		
-		ArrayList<ArrayList<Byte>> tracks = new ArrayList<ArrayList<Byte>>();
-		tracks.add(song1);
-		tracks.add(song2);
-		Byte[] output = Fachada.somaFaixas(tracks);
-		for (Byte b: output)
-			System.out.println(b.intValue());
+
+
+                // Teste da carga de bytes do áudio para byte:
+		Track t1 = new Track("/home/pedroguimaraes/Download/mp3/01.mp3");
+                Track t2 = new Track("/home/pedroguimaraes/Download/mp3/08.mp3");
+
+                byte b1[] = t1.loadTrackByteArray();
+                byte b2[] = t2.loadTrackByteArray();
+
+                t1.playFromByteArray(b1);
+                t2.playFromByteArray(b2);
 	}
 }
 

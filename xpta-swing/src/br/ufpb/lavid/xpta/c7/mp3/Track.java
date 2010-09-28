@@ -168,11 +168,20 @@ public class Track implements Runnable {
         din = AudioSystem.getAudioInputStream(decodedFormat, in);
 
         byte[] track = new byte[mp3SizeInBytes];
+        int trackCount = 0;
+        byte[] aux = new byte[4608];
         int bytesLidos = 0;
-        
+
+        System.out.println("Size: "+mp3SizeInBytes);
         while (bytesLidos != -1) {
             try {
-                bytesLidos = din.read(track);
+                bytesLidos = din.read(aux);
+                for (int i = 0 ; i < bytesLidos ; i++)
+                    track[trackCount++] = aux[i];
+
+                for (byte b: track)
+                    if (b != 0 )
+                        System.out.print(b+" ");
             } catch (IOException ex) {
                 Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -183,15 +192,17 @@ public class Track implements Runnable {
     public void playFromByteArray(byte[] track) {
         createLine();
         int contadorDeBytes = 0;
+        int bytesEscritos = 0;
         remaingBytesUntilEnd = track.length;
         while (isPlaying && remaingBytesUntilEnd > 0) {
             if (!pause) {
                 nBytesRead = 4096;
-                line.write(track, contadorDeBytes, nBytesRead);
+                bytesEscritos += line.write(track, contadorDeBytes, nBytesRead);
                 contadorDeBytes += nBytesRead;
                 remaingBytesUntilEnd -= nBytesRead;
             }
             // Encerra a carga de bytes:
+            System.out.println("Bytes escritos: " + bytesEscritos);
             killLine();
         }
     }
