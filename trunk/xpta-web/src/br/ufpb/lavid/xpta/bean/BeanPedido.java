@@ -71,26 +71,35 @@ public class BeanPedido {
 	public Projeto retornaProjeto(){
 		return this.projeto = beanProjeto.getProjeto();
 
-		
 	}
 	
+	// ***** Add Pedido ao usuario ******
 	public void addPedidoUsuario(Pedido pedido){
 		controllerUsuario.addPedidoUsuario(retornaUsuario(), pedido);
 	}
 	
+	// ***** Add Pedido ao Projeto ****** 
 	public void addPedidoProjeto(Pedido pedido){
 		controllerProjeto.addPedidoProjeto(retornaProjeto(), pedido);
 	}
 	
+	// ***** Lista os pedidos pendentes deste usuário *****
 	public DataModel getListaPedidosPendentes(){
 		Usuario user = retornaUsuario();
 		System.out.print("|||||||" + user.getNome() + "||||||||$$$$");
 		
 		return controllerPedido.listaPedidosPendentes(user);
 	}
+	
+	// **** Modifica o Status de False para True no banco *****
+	public String permitirEdicaoProjeto(){
+		controllerPedido.permissionEditionProject();
+		
+		return "";
+	}
 
 	
-	//Getters and Setters...
+	// **** Getters and Setters... *****
 	
 	public ControllerPedido getControllerPedido() {
 		return controllerPedido;
