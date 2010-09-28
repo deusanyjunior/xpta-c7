@@ -1,8 +1,7 @@
 package br.ufpb.lavid.xpta.controller;
 
 import javax.faces.model.DataModel;
-
-import org.richfaces.model.impl.ListDataModel;
+import javax.faces.model.ListDataModel;
 
 import br.ufpb.lavid.xpta.dao.DaoPedido;
 import br.ufpb.lavid.xpta.model.Pedido;
@@ -38,6 +37,11 @@ public class ControllerPedido {
 		return dataModel;
 	}
 	
-	
+	public String permissionEditionProject(){
+		Pedido pedido = (Pedido) dataModel.getRowData();
+		pedido.setStatus(true);
+		salvarPedido(pedido);
+		return "pedidoSalvo";
+	}
 	
 }
