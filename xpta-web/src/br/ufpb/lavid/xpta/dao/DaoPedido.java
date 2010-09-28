@@ -12,6 +12,6 @@ public class DaoPedido extends DAOJPA<Pedido>{
 	}
 	
 	public List<Pedido> findProjectPending(Usuario user){
-		return (List<Pedido>) super.findAllByQuery("Select pe from Pedido pe where pe.status = 'false'");
+		return (List<Pedido>) super.findAllByQuery("Select pe from Pedido pe where pe.projeto.autor.codigo = " + user.getCodigo() + "and pe.status = FALSE");
 	}
 }
