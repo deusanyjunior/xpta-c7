@@ -57,6 +57,13 @@
 				</f:facet>
 				<h:outputText value="#{projeto.permissao}" />
 			</rich:column>
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Player" />
+						</f:facet>
+						<h:commandLink value="Ouvir" action="#{projetoB.retornaProjeto}" />
+					
+			</rich:column>
 		</rich:dataTable></fieldset>
 		
 		<br></br>
@@ -112,11 +119,43 @@
 						</f:facet>
 						<h:commandLink value="Saiba mais" action="#{projetoB.retornaProjeto}" />
 					
+			</rich:column>
+			<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Player" />
+						</f:facet>
+						<h:commandLink value="Ouvir" action="#{projetoB.retornaProjeto}" />
+					
 			</rich:column>	
 				
 		</rich:dataTable></fieldset>
 		<br></br>
 		<br></br>
+		
+		<fieldset style="height: 60%"><legend>Pedidos pendentes</legend> <rich:dataTable
+			value="#{pedidoB.listaPedidosPendentes}" var="pedido"
+			id="listaPedidosPendentes">
+			
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Usuário solicitante " />
+				</f:facet>
+				<h:outputText value="#{pedido.usuario.nome}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Projeto solicitado " />
+				</f:facet>
+				<h:outputText value="#{pedido.projeto.nome}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Status " />
+				</f:facet>
+				<h:outputLink>Permitir</h:outputLink>
+			</rich:column>
+			</rich:dataTable>
+			</fieldset>
 		
 	</h:form>
 	</body>
