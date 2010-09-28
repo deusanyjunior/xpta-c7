@@ -61,29 +61,26 @@ public class Fachada {
 		return command("mkdir "+nomeDoDiretorio);
 	}
 	
-	public static Byte[] somaFaixas(ArrayList<ArrayList<Byte>> listaDeTracks) {
-	
-		int maxBytes = 0;
-		// Verifica o maior número de bytes necessário:
-		for (ArrayList<Byte> track: listaDeTracks) {
-			if (track.size() > maxBytes)
-				maxBytes = track.size();
-		}
-		
-		Byte[] total = new Byte[maxBytes];
+        /**
+         * Soma os bytes de todas as faixas. Precisa tratar o caso da soma de byte estourar os valores. (THRESHOLD)
+         * @param tracks
+         * @return
+         */
+        public static byte[] somaFaixas(ArrayList<byte[]> tracks) {
 
-		for (ArrayList<Byte> track: listaDeTracks) {
-			for (int i = 0 ; i < track.size() ; i++) {
-				// TODO: implementar o limite depois (threshold?)
-				// TODO: gambiarra da porra.
-				if (total[i] == null)
-					total[i] = track.get(i);
-				else
-					total[i] =   Byte.valueOf(Integer.toString(total[i].intValue() + track.get(i).intValue()));
-			}
-		}
+            // Pega o número de bytes da maior track:
+            int maior = 0;
+            for (byte[] t: tracks)
+                if (maior < t.length)
+                    maior = t.length;
 
-		return total;
-	}
+            byte[] soma = new byte[maior];
+
+            for (byte[] t: tracks) {
+                for (int i = 0 ; i < t.length ; i++)
+                    soma[i] += t[i];
+            }
+            return soma;
+        }
 }
 
