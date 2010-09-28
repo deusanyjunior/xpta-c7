@@ -3,6 +3,7 @@ package br.ufpb.lavid.xpta.c7.mp3;
 import br.ufpb.lavid.xpta.c7.waveform.WaveformPanelContainer;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioFormat;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import javax.sound.sampled.AudioFileFormat;
 import org.tritonus.share.sampled.TAudioFormat;
+import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 public class Track implements Runnable {
 
@@ -26,6 +28,7 @@ public class Track implements Runnable {
     private AudioInputStream in = null;
     private AudioInputStream din = null;
     private AudioFormat decodedFormat = null;
+    private AudioFileFormat baseFileFormat = null;
     private SourceDataLine line = null;
     private FloatControl controladorFloat = null;
     private float previousVolume;
@@ -56,6 +59,14 @@ public class Track implements Runnable {
         this.offset = offset;
 
         audioFile = new File(filePath);
+        try {
+            baseFileFormat = AudioSystem.getAudioFileFormat(audioFile);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         try {
             try {
                 in = AudioSystem.getAudioInputStream(audioFile);
@@ -94,13 +105,14 @@ public class Track implements Runnable {
     }
 
     public void run() {
-        playTrack(decodedFormat, din);
-        try {
-            in.close();
-            din.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
+//        playTrack(decodedFormat, din);
+//        try {
+//            in.close();
+//            din.close();
+//        } catch (IOException i) {
+//            i.printStackTrace();
+//        }
+        System.out.println(baseFileFormat.toString());
     }
 
     private void loadTrack() {
@@ -137,20 +149,17 @@ public class Track implements Runnable {
     }
 
     public byte[] loadTrackByteArray() {
+        // Pega o tamanho da mp3 em bytes:
+        Integer mp3SizeInBytes = null;
+        if (baseFileFormat instanceof TAudioFileFormat) {
+            Map properties = ((TAudioFileFormat)baseFileFormat).properties();
+            String key = "mp3.length.bytes";
+            mp3SizeInBytes = (Integer)properties.get(key);
+            // System.out.println("Size in bytes: " + mp3SizeInBytes);
+         }
 
         AudioFormat baseFormat = in.getFormat();
-        AudioFileFormat baseFileFormat = null;
-
-        // TAudioFormat properties
-        Integer mp3SizeInBytes = null;
-        if (baseFormat instanceof TAudioFormat) {
-            Map properties = ((TAudioFormat) baseFormat).properties();
-            String key = "duration";
-            mp3SizeInBytes = (Integer) properties.get(key);
-        }
-
-        System.out.println("Duration: "+mp3SizeInBytes);
-
+        
         decodedFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
                 baseFormat.getSampleRate(), 16, baseFormat.getChannels(),
                 baseFormat.getChannels() * 2, baseFormat.getSampleRate(),
@@ -159,25 +168,32 @@ public class Track implements Runnable {
         din = AudioSystem.getAudioInputStream(decodedFormat, in);
 
         byte[] track = new byte[mp3SizeInBytes];
-        byte[] aux = null;
-        int lastByte = 0;
         int bytesLidos = 0;
-        int available = 0;
-
+        
         while (bytesLidos != -1) {
             try {
-                available = din.available();
-                aux = new byte[available];
-                bytesLidos = din.read(aux, 0, available);
-                din.read(aux);
+                bytesLidos = din.read(track);
             } catch (IOException ex) {
                 Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (int i = 0 ; i < bytesLidos ; i++) {
-                track[lastByte++] = aux[i];
-            }
         }
         return track;
+    }
+
+    public void playFromByteArray(byte[] track) {
+        createLine();
+        int contadorDeBytes = 0;
+        remaingBytesUntilEnd = track.length;
+        while (isPlaying && remaingBytesUntilEnd > 0) {
+            if (!pause) {
+                nBytesRead = 4096;
+                line.write(track, contadorDeBytes, nBytesRead);
+                contadorDeBytes += nBytesRead;
+                remaingBytesUntilEnd -= nBytesRead;
+            }
+            // Encerra a carga de bytes:
+            killLine();
+        }
     }
 
     private void playTrack(AudioFormat targetFormat, AudioInputStream din) {
@@ -213,12 +229,32 @@ public class Track implements Runnable {
         }
     }
 
+    private  void createLine() {
+        try {
+            line = getLine(decodedFormat);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (line != null) {
+            isPlaying = true;
+            // Inicializa a comunicação da linha:
+            line.start();
+            setVolume(vol);
+        }
+    }
+
+    private void killLine() {
+            isPlaying = false;
+            // Stop playing
+            line.drain();
+            line.stop();
+            line.close();
+    }
+
     private void rawPlay() {
         // Indica a execução do áudio para o sistema:
-
-        int a = 0;
         while (isPlaying && remaingBytesUntilEnd > 0) {
-            System.out.print("");
             if (!pause) {
                 try {
                     // Preencha o array com bytes do input stream de entrada.
