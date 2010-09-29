@@ -148,9 +148,10 @@ public class Track implements Runnable {
 
     }
 
-    public byte[] loadTrackByteArray() {
+    public byte[] loadMp3ByteArray() {
         // Pega o tamanho da mp3 em bytes:
         Integer mp3SizeInBytes = null;
+
         if (baseFileFormat instanceof TAudioFileFormat) {
             Map properties = ((TAudioFileFormat)baseFileFormat).properties();
             String key = "mp3.length.bytes";
@@ -168,20 +169,83 @@ public class Track implements Runnable {
         din = AudioSystem.getAudioInputStream(decodedFormat, in);
 
         byte[] track = new byte[mp3SizeInBytes];
-        int trackCount = 0;
-        byte[] aux = new byte[4608];
+        byte[] aux = new byte[5000];
         int bytesLidos = 0;
+        int trackCount = 0;
+        int total = 0;
 
-        System.out.println("Size: "+mp3SizeInBytes);
+        System.out.println("Size: " + (double)mp3SizeInBytes/1000000 + " MB");
+
         while (bytesLidos != -1) {
             try {
-                bytesLidos = din.read(aux);
-                for (int i = 0 ; i < bytesLidos ; i++)
-                    track[trackCount++] = aux[i];
 
-                for (byte b: track)
-                    if (b != 0 )
-                        System.out.print(b+" ");
+                bytesLidos = din.read(aux);
+                total += bytesLidos;
+//              if (bytesLidos != -1)
+//                  for (int i = 0 ; i < bytesLidos ; i++)
+//                      track[trackCount++] = aux[i];
+                
+                /** Laço utilizado para visualizar a carga dos bytes:
+                int lineBreaker = 0;
+                for (byte b: aux) {
+                    System.out.print(b+" ");
+                    if (lineBreaker > 50) {
+                        System.out.println();
+                        lineBreaker = 0;
+                    }
+                    lineBreaker++;
+                }
+                **/
+            } catch (IOException ex) {
+                Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        System.out.println("Total de bytes lidos: " + (double)total/1000000 + " | Tamanho da mp3 em bytes: " + (double)mp3SizeInBytes/1000000);
+        return track;
+    }
+
+    public byte[] loadTrackByteArray() {
+
+        AudioFormat baseFormat = in.getFormat();
+
+        decodedFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+                baseFormat.getSampleRate(), 16, baseFormat.getChannels(),
+                baseFormat.getChannels() * 2, baseFormat.getSampleRate(),
+                false);
+
+        din = AudioSystem.getAudioInputStream(decodedFormat, in);
+
+        Long size = audioFile.length();
+        int smallSize = Integer.parseInt(Long.toString(size));
+        byte[] track = new byte[smallSize];
+        byte[] aux = new byte[5000];
+        int bytesLidos = 0;
+        int trackCount = 0;
+        int total = 0;
+
+        System.out.println("Size: " + (double)smallSize/1000000 + " MB");
+
+        while (bytesLidos != -1) {
+            try {
+
+              bytesLidos = din.read(aux);
+              total += bytesLidos;
+              if (bytesLidos != -1)
+                  for (int i = 0 ; i < bytesLidos ; i++)
+                      track[trackCount++] = aux[i];
+
+                /** Laço utilizado para visualizar a carga dos bytes:
+                int lineBreaker = 0;
+                for (byte b: aux) {
+                    System.out.print(b+" ");
+                    if (lineBreaker > 50) {
+                        System.out.println();
+                        lineBreaker = 0;
+                    }
+                    lineBreaker++;
+                }
+                **/
+
             } catch (IOException ex) {
                 Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
             }

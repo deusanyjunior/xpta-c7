@@ -30,15 +30,23 @@ public class Testes {
 		*/
 
 
-                // Teste da carga de bytes do áudio para byte:
-		Track t1 = new Track("/home/pedroguimaraes/Download/mp3/01.mp3");
-                Track t2 = new Track("/home/pedroguimaraes/Download/mp3/08.mp3");
+                /* Teste da carga de bytes do áudio para byte:
+		Track t1 = new Track("/home/pedroguimaraes/Download/mp3/01.wav");
+                Track t2 = new Track("/home/pedroguimaraes/Download/mp3/08.wav");
 
                 byte b1[] = t1.loadTrackByteArray();
                 byte b2[] = t2.loadTrackByteArray();
 
-                t1.playFromByteArray(b1);
-                t2.playFromByteArray(b2);
+                ArrayList<byte[]> tracks = new ArrayList<byte[]>();
+                tracks.add(b1);
+                tracks.add(b2);
+
+                byte[] soma = Fachada.somaFaixas(tracks);
+                System.out.println("Tamanho da track somada: " + (double)soma.length/1000000);
+                 *
+                 */
+
+                Encode.mp3ToWavJLayer("/home/pedroguimaraes/Download/mp3/04.wav", "/home/pedroguimaraes/Download/mp3/041.wav");
 	}
 }
 
