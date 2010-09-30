@@ -1,5 +1,6 @@
 package br.ufpb.lavid.xpta.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufpb.lavid.xpta.model.Projeto;
@@ -35,14 +36,15 @@ public class DaoProjeto extends DAOJPA<Projeto>{
 	}
 	
 	public List<Projeto> findProjectEditors(Usuario user){
-		return (List<Projeto>) super.findAllByQuery("select p from Pedido p where p.usuario.codigo = " + user.getCodigo() + "and status = true");
+		return (List<Projeto>) super.findAllByQuery("select p.projeto from Pedido p where p.usuario.codigo = " + user.getCodigo() + "and status = true");
 	}
 	
 	public List<Projeto> findProjectEdition(Usuario user){
 		return (List<Projeto>) super.findAllByQuery("select p from Pedido p where p.usuario.codigo = " + user.getCodigo() + "and status = false");
 	}
 	
-	public List<Projeto> findOtherProject(Usuario user){
-		return (List<Projeto>) super.findAllByQuery("Select p from Pedido p where p.usuario.codigo <> " + user.getCodigo() + "and p.projeto.autor.codigo <> " + user.getCodigo());
+	public List<Projeto> findOtherProject(int user){
+		return (List<Projeto>) super.findAllByQuery("Select p from Projeto p where p.autor.codigo <> " + user + " and p.codigo <> (select pe.projeto.codigo from Pedido pe where pe.usuario.codigo = " + user + ")");
 	}
+	
 }
