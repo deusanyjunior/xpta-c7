@@ -38,6 +38,8 @@ public class Track implements Runnable {
     private boolean pause = false;
     private boolean isPlaying = false;
     private WaveformPanelContainer container;
+    // Número de bytes por ms necessários para representar a música.
+    private double bytesPerMs = 0;
     // Número de bytes lidos:
     private int nBytesRead = 0;
     // Variável utilizada para implementar pause.
@@ -66,7 +68,7 @@ public class Track implements Runnable {
         } catch (IOException ex) {
             Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             try {
                 in = AudioSystem.getAudioInputStream(audioFile);
@@ -153,14 +155,14 @@ public class Track implements Runnable {
         Integer mp3SizeInBytes = null;
 
         if (baseFileFormat instanceof TAudioFileFormat) {
-            Map properties = ((TAudioFileFormat)baseFileFormat).properties();
+            Map properties = ((TAudioFileFormat) baseFileFormat).properties();
             String key = "mp3.length.bytes";
-            mp3SizeInBytes = (Integer)properties.get(key);
+            mp3SizeInBytes = (Integer) properties.get(key);
             // System.out.println("Size in bytes: " + mp3SizeInBytes);
-         }
+        }
 
         AudioFormat baseFormat = in.getFormat();
-        
+
         decodedFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
                 baseFormat.getSampleRate(), 16, baseFormat.getChannels(),
                 baseFormat.getChannels() * 2, baseFormat.getSampleRate(),
@@ -174,7 +176,7 @@ public class Track implements Runnable {
         int trackCount = 0;
         int total = 0;
 
-        System.out.println("Size: " + (double)mp3SizeInBytes/1000000 + " MB");
+        System.out.println("Size: " + (double) mp3SizeInBytes / 1000000 + " MB");
 
         while (bytesLidos != -1) {
             try {
@@ -184,23 +186,23 @@ public class Track implements Runnable {
 //              if (bytesLidos != -1)
 //                  for (int i = 0 ; i < bytesLidos ; i++)
 //                      track[trackCount++] = aux[i];
-                
+
                 /** Laço utilizado para visualizar a carga dos bytes:
                 int lineBreaker = 0;
                 for (byte b: aux) {
-                    System.out.print(b+" ");
-                    if (lineBreaker > 50) {
-                        System.out.println();
-                        lineBreaker = 0;
-                    }
-                    lineBreaker++;
+                System.out.print(b+" ");
+                if (lineBreaker > 50) {
+                System.out.println();
+                lineBreaker = 0;
                 }
-                **/
+                lineBreaker++;
+                }
+                 **/
             } catch (IOException ex) {
                 Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("Total de bytes lidos: " + (double)total/1000000 + " | Tamanho da mp3 em bytes: " + (double)mp3SizeInBytes/1000000);
+        System.out.println("Total de bytes lidos: " + (double) total / 1000000 + " | Tamanho da mp3 em bytes: " + (double) mp3SizeInBytes / 1000000);
         return track;
     }
 
@@ -223,29 +225,30 @@ public class Track implements Runnable {
         int trackCount = 0;
         int total = 0;
 
-        System.out.println("Size: " + (double)smallSize/1000000 + " MB");
+        System.out.println("Size: " + (double) smallSize / 1000000 + " MB");
 
         while (bytesLidos != -1) {
             try {
 
-              bytesLidos = din.read(aux);
-              total += bytesLidos;
-              if (bytesLidos != -1)
-                  for (int i = 0 ; i < bytesLidos ; i++)
-                      track[trackCount++] = aux[i];
+                bytesLidos = din.read(aux);
+                total += bytesLidos;
+                if (bytesLidos != -1) {
+                    for (int i = 0; i < bytesLidos; i++) {
+                        track[trackCount++] = aux[i];
+                    }
+                }
 
                 /** Laço utilizado para visualizar a carga dos bytes:
                 int lineBreaker = 0;
                 for (byte b: aux) {
-                    System.out.print(b+" ");
-                    if (lineBreaker > 50) {
-                        System.out.println();
-                        lineBreaker = 0;
-                    }
-                    lineBreaker++;
+                System.out.print(b+" ");
+                if (lineBreaker > 50) {
+                System.out.println();
+                lineBreaker = 0;
                 }
-                **/
-
+                lineBreaker++;
+                }
+                 **/
             } catch (IOException ex) {
                 Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -304,7 +307,7 @@ public class Track implements Runnable {
         }
     }
 
-    private  void createLine() {
+    private void createLine() {
         try {
             line = getLine(decodedFormat);
         } catch (LineUnavailableException ex) {
@@ -320,11 +323,11 @@ public class Track implements Runnable {
     }
 
     private void killLine() {
-            isPlaying = false;
-            // Stop playing
-            line.drain();
-            line.stop();
-            line.close();
+        isPlaying = false;
+        // Stop playing
+        line.drain();
+        line.stop();
+        line.close();
     }
 
     private void rawPlay() {
@@ -440,5 +443,13 @@ public class Track implements Runnable {
     public void stop() {
         isPlaying = false;
         pause = false;
+    }
+
+    /**
+     * Retorna o número de bytes utilziados para representar um milisegundo de áudio no formato da track.
+     * @return
+     */
+    public double bytesPerMs() {
+        return decodedFormat.getChannels() * decodedFormat.getFrameRate() * decodedFormat.getFrameSize() / 1000;
     }
 }
