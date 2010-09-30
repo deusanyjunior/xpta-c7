@@ -112,7 +112,7 @@ public class ControllerProjeto {
 	}
 	
 	public DataModel listaOutrosProjetos(Usuario user){
-		dataModel = new ListDataModel(daoProjeto.findOtherProject(user));
+		dataModel = new ListDataModel(daoProjeto.findOtherProject(user.getCodigo()));
 		return dataModel;
 	}
 }
