@@ -68,9 +68,9 @@
   SHAPE="272,769,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:7" PATH="*" SHAPE="32,897,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:7" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="usuarioLogado::#sucesso.xhtml"
-    NAME="output1" PATH="/sucesso.xhtml" TARGET="rules:#sucesso.xhtml"
-    TITLE="usuarioLogado" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="pedidoSalvo::#sucesso.xhtml" NAME="output1"
+    PATH="/sucesso.xhtml" TARGET="rules:#sucesso.xhtml"
+    TITLE="pedidoSalvo" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>
