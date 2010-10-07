@@ -15,15 +15,27 @@
 		<class>br.ufpb.lavid.xpta.model.Track</class>
 		<class>br.ufpb.lavid.xpta.model.Pedido</class>
 			
-		<!--  USANDO POSTGRES  -->	
+		<!--  USANDO MYSQL  -->	
+		
+		<properties>
+			<property name="toplink.jdbc.driver" 	value="com.mysql.jdbc.Driver" />
+			<property name="toplink.jdbc.url" 		value="jdbc:mysql://127.0.0.1:3306/escola" />
+			<property name="toplink.jdbc.user" 		value="root" />				
+			<property name="toplink.jdbc.password" 	value="" />
+			<property name="toplink.logging.level"  value="info" />
+			<property name="toplink.ddl-generation" value="create-tables" />	
+		</properties>
+		
+		
+		<!--  USANDO POSTGRES 	
 		<properties>
 			<property name="toplink.jdbc.driver" 	value="org.postgresql.Driver" />
 			<property name="toplink.jdbc.url" 		value="jdbc:postgresql://localhost:5432/xpta" />
 			<property name="toplink.jdbc.user" 		value="postgres" />				
 			<property name="toplink.jdbc.password" 	value="postgres" />
 			<property name="toplink.logging.level"  value="off" />
-		<!-- <property name="toplink.ddl-generation" value="drop-and-create-tables" />  -->  
+		 <property name="toplink.ddl-generation" value="drop-and-create-tables" />    
 			  
-		</properties>
+		</properties> -->
 	</persistence-unit>
 </persistence>
