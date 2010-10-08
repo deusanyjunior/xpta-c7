@@ -19,9 +19,9 @@
 		
 		<properties>
 			<property name="toplink.jdbc.driver" 	value="com.mysql.jdbc.Driver" />
-			<property name="toplink.jdbc.url" 		value="jdbc:mysql://127.0.0.1:3306/escola" />
+			<property name="toplink.jdbc.url" 		value="jdbc:mysql://127.0.0.1:3306/xpta" />
 			<property name="toplink.jdbc.user" 		value="root" />				
-			<property name="toplink.jdbc.password" 	value="" />
+			<property name="toplink.jdbc.password" 	value="root" />
 			<property name="toplink.logging.level"  value="info" />
 			<property name="toplink.ddl-generation" value="create-tables" />	
 		</properties>
