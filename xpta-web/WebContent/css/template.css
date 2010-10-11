@@ -1,0 +1,124 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	background-image: url(../imagens/bg.png);
+	background-color: #a3dcff;
+	background-position:bottom;
+	background-repeat:repeat-x;
+	font-family:Tahoma, Geneva, sans-serif;
+	margin: 0px;
+	padding:0px;
+}
+
+.clear { 
+clear : both; 
+} 
+
+.texto {
+	text-align:justify;
+	text-justify:distribute;
+	text-indent:hanging;
+	font-size:12px;
+	padding:10px;
+}
+	
+
+#rodape {
+	background-image:url(../imagens/bg_rodape.png);
+	background-repeat:no-repeat;
+	background-position:bottom;
+	margin:0px !important;
+	z-index: -2;
+}
+	
+#corpo {
+	width:100%;
+	background-image:url(../imagens/bg_topo.png);
+	background-repeat:repeat-x;
+	background-position:center;
+	z-index:-1;
+}
+
+#topo {
+	background-image:url(../imagens/topo_box.png);
+	background-repeat:no-repeat;
+	background-position:center;
+	float:inherit;
+	width:930px;
+	height:227px;
+	overflow:hidden;
+	margin-left:auto;
+	margin-right:auto;
+}
+#topo_interno {
+	padding: 20px 25px;
+}
+
+#logo {
+	float:left;
+	width:350px;
+}
+
+#menu_topo {
+	width: 400px;
+	height: 120px;
+	float: right;
+}
+
+#login_topo {
+	text-align:right;
+	text-decoration:none;
+	font-size:12px;
+	width:400px;
+	float:right;
+	vertical-align:bottom;
+}
+
+#principal {
+	width:930px;
+	float:inherit;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#descricao_colaboke {
+	float:left;
+	width:337px;
+	height:290px;
+	margin-left: 16px;
+	background-image:url(../imagens/bg_pginicial_desc.png);
+	background-repeat:repeat;
+	background-position:center;
+	overflow:hidden;
+}
+
+#usuarios {
+	float:right;
+	width:531px;
+	height:290px;
+	margin-right: 16px;
+	background-image:url(../imagens/bg_pginicial_usuarios.png);
+	background-repeat:repeat;
+	background-position:center;
+	overflow:hidden;
+}
+
+#projetos {
+	float:left;
+	width:898px;
+	height:290px;
+	margin-left: 16px;
+	margin-right: 16px;
+	background-image:url(../imagens/bg_pginicial_projetos.png);
+	background-repeat:repeat;
+	background-position:center;
+	overflow:hidden;
+}
+
+#patrocinios {
+	height:140px;
+	width:898px;
+}
+		
+	
