@@ -62,8 +62,17 @@ clear : both;
 
 #menu_topo {
 	width: 400px;
-	height: 120px;
+	height: 100px;
 	float: right;
+}
+
+#menu_topo input{
+	 padding-left: 10px;
+	 text-align: right;
+}
+
+#menu_topo img {
+	padding-left: 10px;
 }
 
 #login_topo {

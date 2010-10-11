@@ -1,11 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich">
+    xmlns:rich="http://richfaces.org/rich"
+    >
+    
 <f:view>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,7 +17,6 @@
 </head>	
 
 <body>
-
 <div id="rodape">
 <div id="corpo" align="center">
 
@@ -26,20 +28,20 @@
 <img src="imagens/topo_texto.png" vspace="40px" hspace="10px" />
 </div>
 
-<div id="menu_topo">
-<img src="imagens/btn_home.png" align="right" hspace="10px"/>
-<img src="imagens/btn_projetos.png" align="right" hspace="10px"/>
-<img src="imagens/btn_cadastre.png" align="right" hspace="10px"/>  
-
-<h:commandButton action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
+<div id="menu_topo" align="right">
+<h:form id="menu_topo"> 
+<img src="imagens/btn_home.png"/>
+<img src="imagens/btn_projetos.png" />
+<h:commandButton image="imagens/btn_cadastre.png"  action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
+</h:form>
 </div>
 
 <div id="login_topo">
 <h:form>
-	<h:outputText value="nome:" />
-	<h:inputText value="#{usuarioB.login}" />
+	<h:outputText value="Usuario:" />
+	<h:inputText value="#{usuarioB.login}" /><br />
 	<h:outputText value="Senha:" />
-	<h:inputSecret value="#{usuarioB.senha}"/>
+	<h:inputSecret value="#{usuarioB.senha}"/><br />
 	<h:commandButton action="#{usuarioB.fazerLogin}" value="Enviar" />  
 </h:form>
 </div>
