@@ -7,24 +7,66 @@
     xmlns:a4j="http://richfaces.org/a4j"
     xmlns:rich="http://richfaces.org/rich">
 <f:view>
-	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Colaboke</title>
+<link href="css/template.css" rel="stylesheet" type="text/css" />
+</head>	
 
 <body>
-<h1>XPTA</h1>
-<h:form >
+
+<div id="rodape">
+<div id="corpo" align="center">
+
+<div id="topo">
+<div id="topo_interno">
+
+<div id="logo">
+<img src="imagens/colaboke.png"  />
+<img src="imagens/topo_texto.png" vspace="40px" hspace="10px" />
+</div>
+
+<div id="menu_topo">
+<img src="imagens/btn_home.png" align="right" hspace="10px"/>
+<img src="imagens/btn_projetos.png" align="right" hspace="10px"/>
+<img src="imagens/btn_cadastre.png" align="right" hspace="10px"/>  
+
+<h:commandButton action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
+</div>
+
+<div id="login_topo">
+<h:form>
 	<h:outputText value="nome:" />
 	<h:inputText value="#{usuarioB.login}" />
-	<br></br>
-	<br></br>
 	<h:outputText value="Senha:" />
 	<h:inputSecret value="#{usuarioB.senha}"/>
-	<br></br>
-	<br></br>
-	<h:commandButton action="#{usuarioB.fazerLogin}" value="Enviar" />
-	<h:commandButton action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
-	<br></br>
-	<br />
-	  <fieldset style="height: 95%"><legend>Projetos</legend> 
+	<h:commandButton action="#{usuarioB.fazerLogin}" value="Enviar" />  
+</h:form>
+</div>
+
+</div> <!-- fim de topo_interno -->
+</div> <!-- fim de topo -->
+
+<div id="principal">
+
+<div id="descricao_colaboke">
+<div class="texto">
+O Colaboke<br />
+  <br />
+O presente projeto tem o objetivo de projetar e desenvolver uma  ferramenta de construção de documentos colaborativos baseados em áudio. <br />
+<br />
+A idéia principal é permitir que grupos de usuários, através de uma  interface amigável e personalizada (para cada perfil de usuário), possam  construir em conjunto músicas, aulas, palestras, etc. <br />
+<br />
+Usando a música como exemplo, cada usuário poderia adicionar uma trilha  de áudio na música, de forma a que a mixagem final de todas as trilhas  produzidas por cada usuário possa formar uma música construída  colaborativamente e à distância.<br />
+</div>
+</div>
+
+<div id="usuarios">
+</div>
+
+<div id="projetos">
+<h:form>
+  <fieldset><legend>Projetos</legend> 
 		<rich:dataTable value="#{projetoB.listaProjetosPublicos}" var="projeto" id="listaProjeto">
 			<rich:column filterBy="#{projeto.codigo}" filterEvent="onkeyup" sortBy="#{projeto.codigo}">
 			<f:facet name="header">
@@ -79,11 +121,21 @@
 		</rich:dataTable>
 	</fieldset>
 	
-	
-	<br></br>
-	
 
 </h:form>
+
+</div>
+
+
+<div class="clear"></div>
+</div> <!-- fim de principal -->
+
+<div id="patrocinios">
+</div>
+</div> <!-- fim de corpo -->
+<div class="clear"></div>
+</div> <!-- fim de rodape -->
+
 </body>
 
 </f:view>
