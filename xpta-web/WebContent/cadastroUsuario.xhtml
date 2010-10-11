@@ -8,7 +8,47 @@
     xmlns:rich="http://richfaces.org/rich">
     
 <f:view>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Colaboke</title>
+<link href="css/template.css" rel="stylesheet" type="text/css" />
+</head>	
+
 <body>
+<div id="rodape">
+<div id="corpo" align="center">
+
+<div id="topo">
+<div id="topo_interno">
+
+<div id="logo">
+<img src="imagens/colaboke.png"  />
+<img src="imagens/topo_texto.png" vspace="40px" hspace="10px" />
+</div>
+
+<div id="menu_topo" align="right">
+<h:form id="menu_topo"> 
+<img src="imagens/btn_home.png"/>
+<img src="imagens/btn_projetos.png" />
+<h:commandButton image="imagens/btn_cadastre.png"  action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
+</h:form>
+</div>
+
+<div id="login_topo">
+<h:form>
+	<h:outputText value="Usuario:" />
+	<h:inputText value="#{usuarioB.login}" /><br />
+	<h:outputText value="Senha:" />
+	<h:inputSecret value="#{usuarioB.senha}"/><br />
+	<h:commandButton action="#{usuarioB.fazerLogin}" value="Enviar" />  
+</h:form>
+</div>
+
+</div> <!-- fim de topo_interno -->
+</div> <!-- fim de topo -->
+
+<div id="principal">
 
 <h:form>
 
@@ -35,6 +75,19 @@
 	
 	
 </h:form>
+
+
+<div class="clear"></div>
+</div> <!-- fim de principal -->
+
+<div id="patrocinios">
+</div>
+</div> <!-- fim de corpo -->
+<div class="clear"></div>
+</div> <!-- fim de rodape -->
+
+
+
 </body>
 
 </f:view>    
