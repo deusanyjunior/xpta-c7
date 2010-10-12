@@ -24,7 +24,7 @@ public class ControllerPedido {
 			}
 				
 		} catch (Exception e) {
-			// TODO: handle exception
+			daoPedido.close();
 		}finally{
 			daoPedido.close();
 		}

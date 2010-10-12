@@ -3,9 +3,6 @@ package br.ufpb.lavid.xpta.bean;
 import java.util.Date;
 
 import javax.faces.model.DataModel;
-import javax.xml.crypto.Data;
-
-
 import br.ufpb.lavid.xpta.controller.ControllerProjeto;
 import br.ufpb.lavid.xpta.controller.ControllerUsuario;
 import br.ufpb.lavid.xpta.model.Projeto;

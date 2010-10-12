@@ -16,9 +16,6 @@ import org.richfaces.model.UploadItem;
 
 import br.ufpb.lavid.xpta.model.File2;
 import br.ufpb.lavid.xpta.model.Projeto;
-import br.ufpb.lavid.xpta.mp3.Track;
-import br.ufpb.lavid.xpta.services.Encode;
-import br.ufpb.lavid.xpta.services.Testes;
 
 
 
@@ -93,14 +90,8 @@ public class BeanFile{
 		}
 		
 		String caminhoMp3 = filepath + nomeDoArquivo;
-		String caminhoWav = caminhoMp3 + ".wav";
+
 		System.out.println("Caminho do mp3 !!! " + caminhoMp3);
-		System.out.println("Caminho do wav !!! " + caminhoWav);
-		Encode.mp3ToWavJLayer(caminhoMp3, caminhoWav);
-		
-		Track t = new Track(caminhoWav);
-		byte[] track = new byte[t.getFileSize()];
-		track = t.loadTrackByteArray();
 		
 		fos.close();
 		fis.close();
@@ -108,7 +99,7 @@ public class BeanFile{
 		
 		String s = projeto.getNome();
 		System.out.print("Nome!!!! "+ s);
-		beanTrack.invokeMethods(nome, 0, 0, projeto, track);
+		beanTrack.invokeMethods(nome, 0, 0, projeto, caminhoMp3);
 		
 	}
 

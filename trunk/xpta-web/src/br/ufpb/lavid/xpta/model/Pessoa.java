@@ -12,7 +12,6 @@ import javax.persistence.InheritanceType;
 
 
 @Entity(name="Pessoa")
-@SuppressWarnings("unchecked")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorValue("U")
 @DiscriminatorColumn(name="Status",discriminatorType=DiscriminatorType.STRING)
