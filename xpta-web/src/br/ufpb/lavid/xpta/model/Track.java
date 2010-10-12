@@ -1,18 +1,12 @@
 package br.ufpb.lavid.xpta.model;
 
 
-import java.util.HashMap;
-
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
-@SuppressWarnings("unchecked")
+
 @Entity
 public class Track {
 
@@ -23,8 +17,7 @@ public class Track {
 	private String nome;
 	private int volume;
 	private int pan;
-	private byte[] trilha ={};
-	private HashMap audio = new HashMap();
+	private String trilha;
 	
 	
 	private int projeto;
@@ -72,20 +65,12 @@ public class Track {
 		this.pan = pan;
 	}
 
-	public byte[] getTrilha() {
+	public String getTrilha() {
 		return trilha;
 	}
 
-	public void setTrilha(byte[] trilha) {
-		this.trilha = trilha;
-	}
-
-	public HashMap getAudio() {
-		return audio;
-	}
-
-	public void setAudio(HashMap audio) {
-		this.audio = audio;
+	public void setTrilha(String trackDir) {
+		this.trilha = trackDir;
 	}
 
 	public int getProjeto() {

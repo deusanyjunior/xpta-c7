@@ -114,9 +114,9 @@ public class DAOJPA<T>  {
 	}
 
 	@SuppressWarnings("unchecked")
-	public  List findAgregateByQuery(String consulta){
+	public List<T> findAgregateByQuery(String consulta){
 		Query q = getManager().createQuery(consulta);
-		return q.getResultList();
+		return (List<T>) q.getResultList();
 	}
 		
 	public int updadeAll(String consulta) {

@@ -1,6 +1,5 @@
 package br.ufpb.lavid.xpta.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.ufpb.lavid.xpta.model.Projeto;
