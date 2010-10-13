@@ -87,7 +87,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>novoProjeto</from-outcome>
-			<to-view-id>/areaUsuario.xhtml</to-view-id>
+			<to-view-id>/novoProjeto.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

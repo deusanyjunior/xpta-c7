@@ -73,7 +73,7 @@
 	    Email:  <h:outputText value="#{sessionScope.user.email}" /><br />
 	    <br /><br />
 	    <h:form>
-		<h:commandButton action="#{usuarioB.fazerLogout}" value="Sair" />
+		<h:commandButton action="#{usuarioB.fazerLogoutfazerLogout}" value="Sair" />
 		</h:form>
 		</div>
 		</div>
@@ -83,24 +83,7 @@
 		<h3>Criar Projeto</h3>
 	    <br></br>
 		<h:form>
-		<h:outputText value="Nome do Projeto:"/>
-		<h:inputText value="#{projetoB.projeto.nome}"/>
-		<br></br>
-		<br></br>
-		<h:outputText value="Descricao do formato:" />
-		<h:inputText value="#{projetoB.projeto.descricaoFormato}"/>
-		<br></br>
-		<br></br>
-		<h:outputText value="Permissao"/>
-		<h:selectOneMenu value="#{projetoB.projeto.permissao}">
-		<f:selectItem itemValue="" itemLabel="Selecione a permissao"/>
-		<f:selectItem itemValue="Publicado" itemLabel="Publicado"/>
-		<f:selectItem itemValue="Não publicado" itemLabel="Não publicado"/>
-		</h:selectOneMenu>
-		<br></br>
-		<br></br>
-		<h:commandButton action="#{projetoB.cadastrarProjeto}" value="Enviar"/> 
-		
+		 <h:commandButton value="novo" action="#{projetoB.invokeMethods}" />
 		</h:form>
 		
 		</div>
