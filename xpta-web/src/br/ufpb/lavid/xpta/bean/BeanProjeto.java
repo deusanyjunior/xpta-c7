@@ -42,7 +42,6 @@ public class BeanProjeto {
 	
 	/* ******Chama o m�todo do controller para salvar o projeto***** */
 	public String cadastrarProjeto(){
-	
 		controllerProjeto.salvarProjeto(projeto);
 		criarPasta(projeto);
 		addProjetosUsuario(projeto);
