@@ -1,10 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	>
 
 <f:view>
 
@@ -28,19 +31,29 @@
 
 <div id="menu_topo" align="right">
 <h:form id="menu_topo"> 
-<img src="imagens/btn_home.png"/>
-<img src="imagens/btn_projetos.png" />
+<h:outputLink value="areaUsuario.xpta"><img src="imagens/btn_home.png"/></h:outputLink>
+<h:outputLink value="projetos.xpta"><img src="imagens/btn_projetos.png" /></h:outputLink>
 <h:commandButton image="imagens/btn_cadastre.png"  action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
 </h:form>
 </div>
 
 <div id="login_topo">
-<h:form>
+	<h:form>
+	<c:if test="${empty sessionScope.user.nome}">
+
 	<h:outputText value="Usuario:" />
 	<h:inputText value="#{usuarioB.login}" /><br />
 	<h:outputText value="Senha:" />
 	<h:inputSecret value="#{usuarioB.senha}"/><br />
 	<h:commandButton action="#{usuarioB.fazerLogin}" value="Enviar" />  
+
+	</c:if>
+ 
+<c:if test="${not empty sessionScope.user.nome}"><br /><br />
+ Bem vindo, <h:outputText value="#{sessionScope.user.nome}" />!<br />
+ <h:commandButton action="#{usuarioB.fazerLogout}" value="Sair" />
+</c:if>
+
 </h:form>
 </div>
 
@@ -49,21 +62,53 @@
 
 <div id="principal">
 
+	
 
-
-	<h1>Área do usuário</h1>
-	<h2>Meus Projetos</h2>
-	<h:form>
+		<div id="perfil">
+		<div class="texto">
+	    <h3>Perfil</h3><br /><br />
+	    
+	    Nome:  <h:outputText value="#{sessionScope.user.nome}" /><br />
+	    Login:  <h:outputText value="#{sessionScope.user.login}" /><br />
+	    Email:  <h:outputText value="#{sessionScope.user.email}" /><br />
+	    <br /><br />
+	    <h:form>
 		<h:commandButton action="#{usuarioB.fazerLogout}" value="Sair" />
+		</h:form>
+		</div>
+		</div>
+		
+		<div id="criar_projeto">
+		<div class="texto">
+		<h3>Criar Projeto</h3>
+	    <br></br>
+		<h:form>
+		<h:outputText value="Nome do Projeto:"/>
+		<h:inputText value="#{projetoB.projeto.nome}"/>
 		<br></br>
 		<br></br>
-		Ola:  <h:outputText value="#{sessionScope.user.nome}" />
+		<h:outputText value="Descricao do formato:" />
+		<h:inputText value="#{projetoB.projeto.descricaoFormato}"/>
 		<br></br>
 		<br></br>
-		<h:commandButton value="novo" action="#{projetoB.invokeMethods}" />
-		<h:outputLink value="exibirOutrosProjetos.xpta">+Projetos</h:outputLink>
+		<h:outputText value="Permissao"/>
+		<h:selectOneMenu value="#{projetoB.projeto.permissao}">
+		<f:selectItem itemValue="" itemLabel="Selecione a permissao"/>
+		<f:selectItem itemValue="Publicado" itemLabel="Publicado"/>
+		<f:selectItem itemValue="Não publicado" itemLabel="Não publicado"/>
+		</h:selectOneMenu>
 		<br></br>
-		<fieldset style="height: 60%"><legend>Meus Projetos</legend> 
+		<br></br>
+		<h:commandButton action="#{projetoB.cadastrarProjeto}" value="Enviar"/> 
+		
+		</h:form>
+		
+		</div>
+		</div>
+		
+		
+		<h:form>
+		<fieldset id="projetos"><legend>Meus Projetos</legend> 
 		<rich:dataTable value="#{projetoB.listaMeusProjetos}" var="projeto" id="listaProjeto">
 		
 			<rich:column>
@@ -100,19 +145,13 @@
 				</f:facet>
 				<h:outputText value="#{projeto.permissao}" />
 			</rich:column>
-			<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Player" />
-						</f:facet>
-						<h:commandLink value="Ouvir" action="#{projetoB.retornaProjeto}" />
-					
-			</rich:column>
 		</rich:dataTable></fieldset>
-		
+		</h:form>
 		<br></br>
 		<br></br>
 		
-		<fieldset style="height: 60%"><legend>Projetos Editáveis</legend> <rich:dataTable
+		<h:form>
+		<fieldset id="projetos"><legend>Projetos Editáveis</legend> <rich:dataTable
 			value="#{projetoB.listaProjeto}" var="projeto"
 			id="listaProjetoUsuarioEditavel">
 			
@@ -156,26 +195,15 @@
 						</f:facet>
 						
 			</rich:column>		
-			<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Informações" />
-						</f:facet>
-						<h:commandLink value="Saiba mais" action="#{projetoB.retornaProjeto}" />
-					
-			</rich:column>
-			<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Player" />
-						</f:facet>
-						<h:commandLink value="Ouvir" action="#{projetoB.retornaProjeto}" />
-					
-			</rich:column>	
 				
 		</rich:dataTable></fieldset>
+		</h:form>
+		
 		<br></br>
 		<br></br>
 		
-		<fieldset style="height: 60%"><legend>Pedidos pendentes</legend> <rich:dataTable
+		<h:form>
+		<fieldset id="projetos"><legend>Pedidos pendentes</legend> <rich:dataTable
 			value="#{pedidoB.listaPedidosPendentes}" var="pedido"
 			id="listaPedidosPendentes">
 			
@@ -199,8 +227,7 @@
 			</rich:column>
 			</rich:dataTable>
 			</fieldset>
-		
-	</h:form>
+		</h:form>
 	
 	<div class="clear"></div>
 </div> <!-- fim de principal -->
