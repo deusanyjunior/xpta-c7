@@ -30,6 +30,35 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xpta</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  
+  
+  <servlet>
+        <servlet-name>FileUpload</servlet-name>
+        <servlet-class>br.ufpb.lavid.xpta.servlet.FileUpload</servlet-class>
+    </servlet> 
+    
+    <servlet-mapping>
+        <servlet-name>FileUpload</servlet-name>
+        <url-pattern>/FileUpload</url-pattern>
+    </servlet-mapping>
+  
+  
+  
+  <servlet>
+        <servlet-name>DataFlex</servlet-name>
+        <servlet-class>br.ufpb.lavid.xpta.servlet.DataFlex</servlet-class>
+    </servlet> 
+    
+    <servlet-mapping>
+        <servlet-name>DataFlex</servlet-name>
+        <url-pattern>/DataFlex</url-pattern>
+    </servlet-mapping>
+  
+  
+  
   <login-config>
     <auth-method>BASIC</auth-method>
   </login-config>
