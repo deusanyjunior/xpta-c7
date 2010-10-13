@@ -64,121 +64,20 @@
 
 <div id="principal">
 
-		 <h:form id="uploadForm" enctype="multipart/form-data">
-                <h:panelGrid columns="3">
-                    <h:outputLabel for="file" value="Select file" />
-                    <t:inputFileUpload id="file" value="#{myBean.uploadedFile}" required="true" />
-                    <h:message for="file" style="color: red;" />
 
-                    <h:panelGroup />
-                    <h:commandButton value="Submit" action="#{myBean.submit}" />
-                    <h:message for="uploadForm" infoStyle="color: green;" errorStyle="color: red;" />
-                </h:panelGrid>
-            </h:form>
 
-            <h:outputLink value="file/#{myBean.fileName}" rendered="#{myBean.fileName != null}">
-                Download back
-            </h:outputLink>
+
+<div id="mixer">
+Mixer
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 
 
 
 
 
-
-
- <h:form>
-        <h:panelGrid columns="2" columnClasses="top,top">
-            <rich:fileUpload fileUploadListener="#{fileB.listener}"
-                maxFilesQuantity="#{fileB.uploadsAvailable}"
-                id="upload"
-                immediateUpload="#{fileB.autoUpload}"
-                acceptedTypes="jpg, gif, png, bmp" allowFlash="#{fileB.useFlash}">
-                <a4j:support event="onuploadcomplete" reRender="info" />
-            </rich:fileUpload>
-            <h:panelGroup id="info">
-                <rich:panel bodyClass="info">
-                    <f:facet name="header">
-                        <h:outputText value="Uploaded Files Info" />
-                    </f:facet>
-                    <h:outputText value="No files currently uploaded"
-                        rendered="#{fileB.size==0}" />
-                    <rich:dataGrid columns="1" value="#{fileB.files}"
-                        var="file" rowKeyVar="row">
-                        <rich:panel bodyClass="rich-laguna-panel-no-header">
-                            <h:panelGrid columns="2">
-                                <a4j:mediaOutput element="img" mimeType="#{file.mime}"
-                                    createContent="#{fileB.paint}" value="#{row}"
-                                    style="width:100px; height:100px;" cacheable="false">
-                                    <f:param value="#{fileB.timeStamp}" name="time"/>  
-                                </a4j:mediaOutput>
-                                <h:panelGrid columns="2">
-                                    <h:outputText value="File Name:" />
-                                    <h:outputText value="#{file.name}" />
-                                    <h:outputText value="File Length(bytes):" />
-                                    <h:outputText value="#{file.length}" />
-                                </h:panelGrid>
-                            </h:panelGrid>
-                        </rich:panel>
-                    </rich:dataGrid>
-                </rich:panel>
-                <rich:spacer height="3"/>
-                <br />
-                <a4j:commandButton action="#{fileB.clearUploadData}"
-                    reRender="info, upload" value="Clear Uploaded Data"
-                    rendered="#{fileB.size>0}" />
-            </h:panelGroup>
-        </h:panelGrid>
-    </h:form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <rich:modalPanel id="panel" width="600" height="300">
-        <f:facet name="header">
-            <h:panelGroup>
-                <h:outputText value="Adicionar arquivo"></h:outputText>
-            </h:panelGroup>
-        </f:facet>
-        <a4j:form>
-        <rich:fileUpload locale="/projetos" fileUploadListener="#{fileB.listener}"
-                maxFilesQuantity="#{fileB.uploadsAvailable}"
-                id="uploadFiles"
-                immediateUpload="#{fileB.autoUpload}"
-                acceptedTypes="mp3" allowFlash="#{fileB.useFlash}">
-                <a4j:support event="onuploadcomplete" reRender="info" />
-            </rich:fileUpload>
-       	</a4j:form>
-        <f:facet name="controls">
-            <h:panelGroup>
-                <h:graphicImage value="/images/modal/close.png" />
-                <rich:componentControl for="panel" attachTo="hidelink" operation="hide" event="onclick"/>
-            </h:panelGroup>
-        </f:facet>
-        
-    </rich:modalPanel>
-    <h:outputLink value="#" id="link">
-        Adicionar Track 
-        <rich:componentControl for="panel" attachTo="link" operation="show" event="onclick"/>
-    </h:outputLink>
-    <br></br>
-    <br></br>
-    <h:outputLink value="/areaUsuario.xpta"> Voltar </h:outputLink>
-
-
-
+</div>
 
 
 
