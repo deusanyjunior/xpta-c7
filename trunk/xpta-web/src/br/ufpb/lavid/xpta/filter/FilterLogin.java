@@ -37,21 +37,19 @@ public class FilterLogin implements Filter {
 		Pessoa userLogado = (Pessoa)req.getSession().getAttribute("user");
 		
 		if (userLogado == null){
-			req.getRequestDispatcher("login.xpta").forward(req, resp);
+			req.getRequestDispatcher("home.xpta").forward(req, resp);
 		}
 		
-		if(userLogado!=null){
-			if(req.getRequestURL().toString().contains("cadastroProjetos")){
-				req.getRequestDispatcher("cadastroProjetos.xpta").forward(req, resp);
-			}
-				
-		}
+		
 		if(userLogado!=null){
 			if(req.getRequestURL().toString().contains("areaUsuario")){
 				req.getRequestDispatcher("areaUsuario.xpta").forward(req, resp);
 			}
 				
 		}
+		
+
+		
 		
 		if(userLogado!=null){
 			if(req.getRequestURL().toString().contains("editarProjeto")){
@@ -60,21 +58,6 @@ public class FilterLogin implements Filter {
 				
 		}
 		
-		/*if (userLogado != null ) {  
-			if(userLogado.getPerfil().equals("Administrador"))
-						chain.doFilter(req, resp);
-			
-			//tentando acessar paginas de coordenador
-			if(	userLogado.getPerfil().equals("Usuario")){
-			//else{
-					if(req.getRequestURL().toString().contains("cadastroProjetos") || req.getRequestURL().toString().contains("userArea"))
-					 		req.getRequestDispatcher("login.xhtml").forward(req, resp);					
-					else chain.doFilter(req, resp);							
-			}
-		}
-		else {
-			req.getRequestDispatcher("login.xhtml").forward(req, resp);
-		} */
 					
 }
 

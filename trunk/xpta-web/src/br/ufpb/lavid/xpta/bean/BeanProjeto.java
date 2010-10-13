@@ -25,6 +25,7 @@ public class BeanProjeto {
 	/* ******Instancia novo projeto****** */
 	
 	public String novoProjeto(){
+		System.err.println(" novoProjeto...");
 		this.projeto = new Projeto();
 		projeto.setDataCriacao(new Date());
 		return "novoProjeto";
@@ -42,9 +43,9 @@ public class BeanProjeto {
 	/* ******Chama o m�todo do controller para salvar o projeto***** */
 	public String cadastrarProjeto(){
 	
-		controllerProjeto.salvarProjeto(this.projeto);
-		criarPasta(this.projeto);
-		addProjetosUsuario(this.projeto);
+		controllerProjeto.salvarProjeto(projeto);
+		criarPasta(projeto);
+		addProjetosUsuario(projeto);
 		return "projetosalvo";
 	}
 	

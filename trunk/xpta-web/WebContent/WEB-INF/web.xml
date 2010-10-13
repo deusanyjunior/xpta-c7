@@ -45,7 +45,6 @@
   <filter-mapping>
 		<filter-name>FilterLogin</filter-name>	
 		<url-pattern>/areaUsuario.xpta</url-pattern>
-		<url-pattern>/cadastroProjetos.xpta</url-pattern>
 		<url-pattern>/editarProjeto.xpta</url-pattern>
  </filter-mapping> 
  

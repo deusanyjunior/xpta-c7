@@ -1,14 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	>
 
-	<f:view>
-	
-	<head>
+<f:view>
+
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Colaboke</title>
 <link href="css/template.css" rel="stylesheet" type="text/css" />
@@ -28,19 +31,29 @@
 
 <div id="menu_topo" align="right">
 <h:form id="menu_topo"> 
-<img src="imagens/btn_home.png"/>
-<img src="imagens/btn_projetos.png" />
+<h:outputLink value="areaUsuario.xpta"><img src="imagens/btn_home.png"/></h:outputLink>
+<h:outputLink value="projetos.xpta"><img src="imagens/btn_projetos.png" /></h:outputLink>
 <h:commandButton image="imagens/btn_cadastre.png"  action="#{usuarioB.novoUsuario}" value="Cadastrar usuario" />
 </h:form>
 </div>
 
 <div id="login_topo">
-<h:form>
+	<h:form>
+	<c:if test="${empty sessionScope.user.nome}">
+
 	<h:outputText value="Usuario:" />
 	<h:inputText value="#{usuarioB.login}" /><br />
 	<h:outputText value="Senha:" />
 	<h:inputSecret value="#{usuarioB.senha}"/><br />
 	<h:commandButton action="#{usuarioB.fazerLogin}" value="Enviar" />  
+
+	</c:if>
+ 
+<c:if test="${not empty sessionScope.user.nome}"><br /><br />
+ Bem vindo, <h:outputText value="#{sessionScope.user.nome}" />!<br />
+ <h:commandButton action="#{usuarioB.fazerLogout}" value="Sair" />
+</c:if>
+
 </h:form>
 </div>
 
@@ -50,6 +63,24 @@
 <div id="principal">
 	
 		<h:form >
+		
+		
+		
+		
+		<c:if test="${not empty projetoB.projeto.nome}">
+		
+			<h1>Informações do Projeto</h1>
+	<h:form>
+		<h:inputText value="#{projetoB.projeto.nome}" />
+		<br></br>
+		<br></br>
+		<h:commandButton value="Solicitar Edição" action="#{pedidoB.invokeMethods}" />
+		<br /><br /><br /><br />
+	</h:form>
+	
+	</c:if>
+	
+		
 			<fieldset style="height: 60%"><legend>Meus Projetos</legend> 
 		<rich:dataTable value="#{projetoB.listaOutrosProjetos}" var="projeto" id="listaOutrosProjetos">
 		
@@ -94,13 +125,7 @@
 						
 			</rich:column>
 			
-			<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Informações" />
-						</f:facet>
-						<h:commandLink value="Saiba mais" action="#{projetoB.retornaProjeto}" />
-					
-			</rich:column>	
+				
 		</rich:dataTable></fieldset>
 		</h:form>
 		

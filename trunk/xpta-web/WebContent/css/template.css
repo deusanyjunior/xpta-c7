@@ -64,6 +64,11 @@ clear : both;
 	width: 400px;
 	height: 100px;
 	float: right;
+	text-decoration: none;
+}
+
+#menu_topo a {
+	text-decoration: none;
 }
 
 #menu_topo input{
@@ -73,6 +78,7 @@ clear : both;
 
 #menu_topo img {
 	padding-left: 10px;
+	border: 0px;
 }
 
 #login_topo {
@@ -116,13 +122,11 @@ clear : both;
 #projetos {
 	float:left;
 	width:898px;
-	height:290px;
 	margin-left: 16px;
 	margin-right: 16px;
 	background-image:url(../imagens/bg_pginicial_projetos.png);
 	background-repeat:repeat;
 	background-position:center;
-	overflow:hidden;
 }
 
 #patrocinios {
@@ -130,4 +134,62 @@ clear : both;
 	width:898px;
 }
 		
+		
+		
+		
+/* area do usuario */
+
+#perfil {
+	float:left;
+	width:434px;
+	height:230px;
+	margin-left: 16px;
+	background-image:url(../imagens/bg_pginicial_desc.png);
+	background-repeat:repeat;
+	background-position:center;
+	overflow:hidden;
+	text-align: left;
+}
 	
+#criar_projeto {
+	float:right;
+	width:434px;
+	height:230px;
+	margin-right: 16px;
+	background-image:url(../imagens/bg_pginicial_usuarios.png);
+	background-repeat:repeat;
+	background-position:center;
+	overflow:hidden;
+	text-align: left;
+}
+
+#solicitacoes_l {
+	float:left;
+	width:434px;
+	margin-left: 16px;
+	background-image:url(../imagens/bg_pginicial_desc.png);
+	background-repeat:repeat;
+	background-position:center;
+}
+
+#solicitacoes_r {
+	float:right;
+	width:434px;
+	margin-left: 16px;
+	background-image:url(../imagens/bg_pginicial_desc.png);
+	background-repeat:repeat;
+	background-position:center;
+}
+
+
+/* cadastro usuario */
+#cadastro_usuario {
+	float:left;
+	width:500px;
+	height:500px;
+	margin-left: 16px;
+	background-image:url(../imagens/bg_pginicial_desc.png);
+	background-repeat:repeat;
+	background-position:center;
+	overflow:hidden;
+}

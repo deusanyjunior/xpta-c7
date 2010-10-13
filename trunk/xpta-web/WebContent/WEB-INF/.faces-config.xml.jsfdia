@@ -9,8 +9,6 @@
     TARGET="rules:#areaUsuario.xhtml" TITLE="sucessoUsuario" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#sucesso.xhtml" PATH="/sucesso.xhtml"
-  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:1" PATH="*" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:1" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="novoUsuario::#cadastroUsuario.xhtml"
@@ -22,55 +20,50 @@
   SHAPE="256,289,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:2" PATH="*" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:2" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="usuarioSalvo::#sucesso.xhtml" NAME="output"
-    PATH="/sucesso.xhtml" TARGET="rules:#sucesso.xhtml"
-    TITLE="usuarioSalvo" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="usuarioSalvo::#areaUsuario.xhtml"
+    NAME="output" PATH="/areaUsuario.xhtml"
+    TARGET="rules:#areaUsuario.xhtml" TITLE="usuarioSalvo" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#cadastroUsuario.xhtml"
   PATH="/cadastroUsuario.xhtml" SHAPE="240,401,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:3" PATH="*" SHAPE="32,385,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:3" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="novoProjeto::#cadastroProjetos.xhtml"
-    NAME="output" PATH="/cadastroProjetos.xhtml"
-    TARGET="rules:#cadastroProjetos.xhtml" TITLE="novoProjeto" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="novoProjeto::#areaUsuario.xhtml"
+    NAME="output" PATH="/areaUsuario.xhtml"
+    TARGET="rules:#areaUsuario.xhtml" TITLE="novoProjeto" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:*:4" PATH="*" SHAPE="32,497,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:4" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="projetosalvo::#sucesso.xhtml" NAME="output"
-    PATH="/sucesso.xhtml" TARGET="rules:#sucesso.xhtml"
-    TITLE="projetosalvo" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="projetosalvo::#areaUsuario.xhtml"
+    NAME="output" PATH="/areaUsuario.xhtml"
+    TARGET="rules:#areaUsuario.xhtml" TITLE="projetosalvo" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#areaUsuario.xhtml" PATH="/areaUsuario.xhtml"
   SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#cadastroProjetos.xhtml"
-  PATH="/cadastroProjetos.xhtml" SHAPE="240,513,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:5" PATH="*" SHAPE="32,609,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:5" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="projetoSelecionado::#informacoesProjeto.xhtml" NAME="output1"
-    PATH="/informacoesProjeto.xhtml"
-    TARGET="rules:#informacoesProjeto.xhtml" TITLE="projetoSelecionado" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="projetoSelecionado::#projetos.xhtml"
+    NAME="output1" PATH="/projetos.xhtml" TARGET="rules:#projetos.xhtml"
+    TITLE="projetoSelecionado" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#informacoesProjeto.xhtml"
-  PATH="/informacoesProjeto.xhtml" SHAPE="256,625,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:6" PATH="*" SHAPE="32,753,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:6" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="usuarioNaoLogado::#login.xhtml"
-    NAME="output1" PATH="/login.xhtml" TARGET="rules:#login.xhtml"
+   <PROCESS-ITEM-OUTPUT ID="usuarioNaoLogado::#home.xhtml"
+    NAME="output1" PATH="/home.xhtml" TARGET="rules:#home.xhtml"
     TITLE="usuarioNaoLogado" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
-  SHAPE="272,769,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:7" PATH="*" SHAPE="32,897,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:7" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="pedidoSalvo::#sucesso.xhtml" NAME="output1"
-    PATH="/sucesso.xhtml" TARGET="rules:#sucesso.xhtml"
-    TITLE="pedidoSalvo" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="pedidoSalvo::#areaUsuario.xhtml"
+    NAME="output1" PATH="/areaUsuario.xhtml"
+    TARGET="rules:#areaUsuario.xhtml" TITLE="pedidoSalvo" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#projetos.xhtml" PATH="/projetos.xhtml"
+  SHAPE="240,625,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
