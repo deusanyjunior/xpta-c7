@@ -2,7 +2,10 @@ package br.ufpb.lavid.xpta.bean;
 
 import java.util.Date;
 
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
+import javax.servlet.http.HttpSession;
+
 import br.ufpb.lavid.xpta.controller.ControllerProjeto;
 import br.ufpb.lavid.xpta.controller.ControllerUsuario;
 import br.ufpb.lavid.xpta.model.Projeto;
@@ -84,6 +87,11 @@ public class BeanProjeto {
 	
 	public String retornaProjeto(){
 		this.projeto = controllerProjeto.retornaProjeto();
+		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		
+		session.setAttribute("projetoAtual", this.projeto);
+		
 		return "projetoSelecionado";
 		
 	}

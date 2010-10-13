@@ -10,6 +10,7 @@ import br.ufpb.lavid.xpta.model.Projeto;
 import br.ufpb.lavid.xpta.model.Usuario;
 
 
+
 public class BeanPedido {
 	
 	private ControllerPedido controllerPedido = new ControllerPedido();

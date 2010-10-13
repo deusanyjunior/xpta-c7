@@ -19,8 +19,7 @@ import br.ufpb.lavid.xpta.model.Pessoa;
 public class FilterLogin implements Filter {
 
 	private FilterConfig filterConfig;
-
-
+	
 	public void destroy() {
 		this.setfilterConfig(null);	
 	}

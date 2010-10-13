@@ -7,26 +7,26 @@
 		<provider>
 			oracle.toplink.essentials.PersistenceProvider
 		</provider>
-			   
+
 		<class>br.ufpb.lavid.xpta.model.Administrador</class>
 		<class>br.ufpb.lavid.xpta.model.Pessoa</class>
 		<class>br.ufpb.lavid.xpta.model.Projeto</class>
 		<class>br.ufpb.lavid.xpta.model.Usuario</class>
 		<class>br.ufpb.lavid.xpta.model.Track</class>
 		<class>br.ufpb.lavid.xpta.model.Pedido</class>
-			
-		<!--  USANDO MYSQL  -->	
-		
+
+		<!--  USANDO MYSQL  -->
+
 		<properties>
-			<property name="toplink.jdbc.driver" 	value="com.mysql.jdbc.Driver" />
-			<property name="toplink.jdbc.url" 		value="jdbc:mysql://127.0.0.1:3306/xpta" />
-			<property name="toplink.jdbc.user" 		value="root" />				
-			<property name="toplink.jdbc.password" 	value="root" />
-			<property name="toplink.logging.level"  value="info" />
-			<property name="toplink.ddl-generation" value="create-tables" />	
+			<property name="toplink.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="toplink.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/xpta" />
+			<property name="toplink.jdbc.user" value="root" />
+			<property name="toplink.jdbc.password" value="H1BR1DUS" />
+			<property name="toplink.logging.level" value="info" />
+			<property name="toplink.ddl-generation" value="create-tables" />
 		</properties>
-		
-		
+
+
 
 	</persistence-unit>
 </persistence>

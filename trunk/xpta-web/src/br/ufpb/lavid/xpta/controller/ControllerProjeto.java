@@ -70,6 +70,21 @@ public class ControllerProjeto {
 		return "projetoEditado";
 	}
 	
+	public String editarProjeto2(Projeto p){
+		try {
+			//p = (Projeto) dataModel.getRowData();
+			daoProjeto.begin();
+			daoProjeto.merge(p);
+			daoProjeto.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			daoProjeto.close();
+		}
+	
+		return "projetoEditado";
+	}
+	
 /* ***************Excluir Projeto ****************** */
 	public String excluirProjeto(Projeto p){
 		try {
