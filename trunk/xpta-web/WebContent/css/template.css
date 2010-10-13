@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 /* CSS Document */
 
@@ -191,4 +192,17 @@ clear : both;
 	background-repeat:repeat;
 	background-position:center;
 	overflow:hidden;
+}
+
+
+/* mixer */
+#mixer {
+	float:left;
+	width:898px;
+	margin-left: 16px;
+	margin-right: 16px;
+	background-image:url(../imagens/bg_pginicial_projetos.png);
+	background-repeat:repeat;
+	background-position:center;
+	text-align: left;
 }
