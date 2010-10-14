@@ -1,6 +1,7 @@
 package br.ufpb.lavid.xpta.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -54,8 +55,33 @@ public class DataFlex extends HttpServlet {
 			
 			controllerProjeto.editarProjeto2(projeto);
 			
-			System.out.println("ID PROJETO ATUAL = "+projeto.getCodigo());
+			//System.out.println("ID PROJETO ATUAL = "+projeto.getCodigo());
 
+		}else if (action.equals("listarAudios")) 
+		{
+		
+			Projeto projeto = (Projeto) request.getSession().getAttribute("projetoAtual");
+			
+			Track track;
+			
+			List<Track> tracks = projeto.getTrackDeAudio();
+			
+			out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+			
+			out.println("<root>");
+			
+			for (int i = 0; i < tracks.size(); i++) {
+
+				track = tracks.get(i);
+				
+				out.println("<track nome = \""+track.getNome()+"\" codigo = \""+track.getCodigo()+"\" pan = \""+track.getPan()+"\" trilha = \""+track.getTrilha()+" volume = \""+track.getVolume()+">");
+				
+				out.println("</comment>");
+
+			}
+			
+			out.println("</root>");
+			
 		}
 
 		out.close();
