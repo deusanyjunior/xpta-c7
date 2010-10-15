@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufpb.lavid.xpta.controller.ControllerProjeto;
+import br.ufpb.lavid.xpta.controller.ControllerTrackUsed;
 import br.ufpb.lavid.xpta.model.Projeto;
 import br.ufpb.lavid.xpta.model.Track;
+import br.ufpb.lavid.xpta.model.TrackUsed;
 
 public class DataFlex extends HttpServlet {
 
@@ -46,14 +48,16 @@ public class DataFlex extends HttpServlet {
 			
 			Track track = new Track();
 			track.setNome(request.getParameter("tituloAudio"));
-			track.setPan(0);
 			track.setProjeto(projeto.getCodigo());
 			track.setTrilha(request.getParameter("caminhoAudio"));
-			track.setVolume(0);
 			
 			projeto.getTrackDeAudio().add(track);
 			
 			controllerProjeto.editarProjeto2(projeto);
+			
+			out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+			out.println("<root>");
+			out.println("</root>");
 			
 			//System.out.println("ID PROJETO ATUAL = "+projeto.getCodigo());
 
@@ -74,12 +78,47 @@ public class DataFlex extends HttpServlet {
 
 				track = tracks.get(i);
 				
-				out.println("<track nome = \""+track.getNome()+"\" codigo = \""+track.getCodigo()+"\" pan = \""+track.getPan()+"\" trilha = \""+track.getTrilha()+" volume = \""+track.getVolume()+">");
+				out.println("<track nome = \""+track.getNome()+"\" codigo = \""+track.getCodigo()+"\" trilha = \""+track.getTrilha()+">");
 				
-				out.println("</comment>");
+				out.println("</track>");
 
 			}
 			
+			out.println("</root>");
+			
+		}else if (action.equals("registraTrackUsed")) 
+		{
+			
+			ControllerProjeto controllerProjeto = new ControllerProjeto();
+			
+			//Projeto projeto = controllerProjeto.retornaProjeto();
+			
+			Projeto projeto = (Projeto) request.getSession().getAttribute("projetoAtual");
+			
+			//projeto.setNome("novo nome");
+			
+			TrackUsed trackUsed = new TrackUsed();
+			
+			trackUsed.setTimeCodeIn(Integer.parseInt(request.getParameter("timeCodeIn")));
+			trackUsed.setTimeCodeOut(Integer.parseInt(request.getParameter("timeCodeOut")));
+			trackUsed.setTrack(Integer.parseInt(request.getParameter("idTrack")));
+			trackUsed.setPan(Integer.parseInt(request.getParameter("pan")));
+			trackUsed.setVolume(Integer.parseInt(request.getParameter("volume")));
+			
+			
+			ControllerTrackUsed cTU = new ControllerTrackUsed();
+			
+			int idTrackUsed = cTU.salvarTrackUsed(trackUsed);
+			
+			projeto.getTrackUseds().add(trackUsed);
+			
+			controllerProjeto.editarProjeto2(projeto);
+			
+			System.out.println("idTrackUsed = "+idTrackUsed);
+			
+			out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+			out.println("<root>");
+			out.println("<idTrackUsed>"+idTrackUsed+"</idTrackUsed>");
 			out.println("</root>");
 			
 		}

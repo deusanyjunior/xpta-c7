@@ -15,8 +15,7 @@ public class Track {
 	private int codigo;
 
 	private String nome;
-	private int volume;
-	private int pan;
+	
 	private String trilha;
 	
 	
@@ -26,10 +25,8 @@ public class Track {
 
 	}
 	
-	public Track(String nome, int volume, int pan){
+	public Track(String nome){
 		this.nome = nome;
-		this.volume = volume;
-		this.pan = pan;
 				
 	}
 
@@ -49,21 +46,7 @@ public class Track {
 		this.nome = nome;
 	}
 
-	public int getVolume() {
-		return volume;
-	}
-
-	public void setVolume(int volume) {
-		this.volume = volume;
-	}
-
-	public int getPan() {
-		return pan;
-	}
-
-	public void setPan(int pan) {
-		this.pan = pan;
-	}
+	
 
 	public String getTrilha() {
 		return trilha;
@@ -79,6 +62,7 @@ public class Track {
 
 	public void setProjeto(int projeto) {
 		this.projeto = projeto;
-	}	
+	}
+
 	
 }

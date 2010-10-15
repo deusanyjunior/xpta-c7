@@ -10,12 +10,12 @@ public class BeanTrack {
 	private Track track;
 	
 	
-	public String invokeMethods(String nome, int volume, int pan, Projeto projeto, String trackDir){
+	public String invokeMethods(String nome, Projeto projeto, String trackDir){
 		try {
 			novaTrack();
 			this.track.setNome(nome);
-			this.track.setVolume(volume);
-			this.track.setPan(pan);
+//			this.track.setVolume(volume);
+//			this.track.setPan(pan);
 			this.track.setProjeto(projeto.getCodigo());
 			this.track.setTrilha(trackDir);
 			salvarTrack(this.track);
