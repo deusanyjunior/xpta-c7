@@ -99,7 +99,7 @@ public class BeanFile{
 		
 		String s = projeto.getNome();
 		System.out.print("Nome!!!! "+ s);
-		beanTrack.invokeMethods(nome, 0, 0, projeto, caminhoMp3);
+		//beanTrack.invokeMethods(nome, 0, 0, projeto, caminhoMp3);
 		
 	}
 

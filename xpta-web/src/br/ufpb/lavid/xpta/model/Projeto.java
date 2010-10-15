@@ -49,6 +49,9 @@ public class Projeto {
 	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private List<Track> trackDeAudio = new ArrayList<Track>();
 	
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	private List<TrackUsed> trackUseds = new ArrayList<TrackUsed>();
+	
 	public Projeto(){
 		
 	}
@@ -124,5 +127,20 @@ public class Projeto {
 	public void addPedidoProjeto(Pedido pedido){
 		this.pedidos.add(pedido);
 	}
+
+	public List<TrackUsed> getTrackUseds() {
+		return trackUseds;
+	}
+
+	public void setTrackUseds(List<TrackUsed> trackUseds) {
+		this.trackUseds = trackUseds;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
+	
+	
 	
 }
