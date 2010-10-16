@@ -17,6 +17,11 @@ public class TrackUsed {
 	private int volume;
 	private int pan;
 	
+	
+	private int mute;
+	private int solo;
+	
+	
 	private int timeCodeIn;
 	private int timeCodeOut;
 	
@@ -73,6 +78,25 @@ public class TrackUsed {
 	public void setTrack(int track) {
 		this.track = track;
 	}
+
+	public int getMute() {
+		return mute;
+	}
+
+	public void setMute(int mute) {
+		this.mute = mute;
+	}
+
+	public int getSolo() {
+		return solo;
+	}
+
+	public void setSolo(int solo) {
+		this.solo = solo;
+	}
+
+
+	
 	
 	
 	
