@@ -76,11 +76,13 @@
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
 			id="main" width="100%" height="2000"
 			codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+			
 			<param name="movie" value="main.swf?id=#{projetoB.projeto.codigo}&amp;nome=#{projetoB.projeto.nome}" />
 			<param name="quality" value="high" />
 			<param name="bgcolor" value="#ffffff" />
 			<param name="allowScriptAccess" value="sameDomain" />
-			<embed src="main.swf?id=#{projetoB.projeto.codigo}&amp;nome=#{projetoB.projeto.nome}" quality="high" bgcolor="#ffffff"
+			
+			<embed src="main.swf?id=#{projetoB.projeto.codigo}&amp;nome=#{projetoB.projeto.nome}&amp;path=/home/jorge/projetos5/Xpta/WebContent/audios&amp;urlBase=localhost:8080/Xpta/FileUpload" quality="high" bgcolor="#ffffff"
 				width="100%" height="2000" name="main" align="middle"
 				play="true"
 				loop="false"
