@@ -50,15 +50,19 @@ public class ControllerTrackUsed {
 //			return "trackEditada";
 //		}
 	/* ***************Excluir Track ****************** */
-//		public String excluirTrack(){
-//			track = (Track) dataModel.getRowData();
-//			daoTrack.begin();
-//			daoTrack.remove(track);
-//			daoTrack.commit();
-//			daoTrack.close();
-//			
-//			return "trackExcluida";
-//		}
+		public String excluirTrackUsed(int codigo){
+			
+			trackUsed = daoTrackUsed.find(codigo);
+			
+			System.out.println("achou = "+trackUsed.getCodigo());
+			
+			daoTrackUsed.begin();
+			daoTrackUsed.remove(trackUsed);
+			daoTrackUsed.commit();
+			daoTrackUsed.close();
+			
+			return "trackExcluida";
+		}
 	/* ************** Getters and Setters ************** */
 //		public Track getTrack() {
 //			return track;

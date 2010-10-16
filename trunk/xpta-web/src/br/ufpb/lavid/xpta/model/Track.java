@@ -18,6 +18,8 @@ public class Track {
 	
 	private String trilha;
 	
+	private int duracao;
+	
 	
 	private int projeto;
 
@@ -64,5 +66,15 @@ public class Track {
 		this.projeto = projeto;
 	}
 
+	public int getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(int duracao) {
+		this.duracao = duracao;
+	}
+
+	
+	
 	
 }
